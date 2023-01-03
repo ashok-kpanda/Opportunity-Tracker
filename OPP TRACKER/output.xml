@@ -1,0 +1,3118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.9.13 on win32)" generated="20230103 13:05:36.442" rpa="true" schemaversion="3">
+<suite id="s1" name="Localdrive" source="c:\Users\ashok.panda\Documents\Robocorp\OPP TRACKER\localdrive.robot">
+<test id="s1-t1" name="Opportunity Tracker" line="22">
+<kw name="Open Application" library="RPA.Outlook.Application" type="SETUP">
+<doc>Open the Outlook application.</doc>
+<status status="PASS" starttime="20230103 13:05:53.196" endtime="20230103 13:05:55.500"/>
+</kw>
+<try>
+<branch type="TRY">
+<kw name="Read Config file">
+<var>${configlist}</var>
+<kw name="Get Current Date" library="DateTime">
+<var>${TodayDate}</var>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<msg timestamp="20230103 13:05:55.514" level="INFO">${TodayDate} = 2023-01-03 13:05:55.513</msg>
+<status status="PASS" starttime="20230103 13:05:55.510" endtime="20230103 13:05:55.523"/>
+</kw>
+<kw name="Open Workbook" library="RPA.Excel.Files">
+<arg>oppTrackConfig.xlsx</arg>
+<doc>Open an existing Excel workbook.</doc>
+<msg timestamp="20230103 13:05:55.587" level="INFO">Opened workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x000001BA2EC74A30&gt;</msg>
+<status status="PASS" starttime="20230103 13:05:55.525" endtime="20230103 13:05:55.588"/>
+</kw>
+<kw name="Read Worksheet As Table" library="RPA.Excel.Files">
+<var>${Config}</var>
+<arg>header=True</arg>
+<doc>Read the contents of a worksheet into a Table container. Allows
+sorting/filtering/manipulating using the ``RPA.Tables`` library.</doc>
+<msg timestamp="20230103 13:05:55.594" level="INFO">Created table: Table(columns=['Input Excel File Path', 'EnquiryEmailBody', 'FollowUpEmailBody'], rows=1)</msg>
+<msg timestamp="20230103 13:05:55.595" level="INFO">${Config} = Table(columns=['Input Excel File Path', 'EnquiryEmailBody', 'FollowUpEmailBody'], rows=1)</msg>
+<status status="PASS" starttime="20230103 13:05:55.590" endtime="20230103 13:05:55.597"/>
+</kw>
+<for flavor="IN">
+<var>${row}</var>
+<value>@{Config}</value>
+<iter>
+<var name="${row}">{'Input Excel File Path': 'C:\\Users\\ashok.panda\\Documents\\Robocorp\\OPP TRACKER\\Opportunity tracker_Remainder.xlsx', 'EnquiryEmailBody': 'Dear  &lt;SalesExecName&gt; ,\n\nThis is an enquiry email for "...</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${InputFilePath}</var>
+<arg>${row}[Input Excel File Path]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:55.604" level="INFO">${InputFilePath} = C:\Users\ashok.panda\Documents\Robocorp\OPP TRACKER\Opportunity tracker_Remainder.xlsx</msg>
+<status status="PASS" starttime="20230103 13:05:55.602" endtime="20230103 13:05:55.604"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${EnquiryEmailBody}</var>
+<arg>${row}[EnquiryEmailBody]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:55.608" level="INFO">${EnquiryEmailBody} = Dear  &lt;SalesExecName&gt; ,
+
+This is an enquiry email for "&lt;proposal&gt;"  proposal
+
+
+
+Regards 
+Opportunity Bot</msg>
+<status status="PASS" starttime="20230103 13:05:55.605" endtime="20230103 13:05:55.608"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${FollowUpEmailBody}</var>
+<arg>${row}[FollowUpEmailBody]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:55.614" level="INFO">${FollowUpEmailBody} = Dear  &lt;SalesExecName&gt; ,
+
+This is a follow up email for "&lt;proposal&gt;"   proposal
+
+
+
+Regards 
+Opportunity Bot</msg>
+<status status="PASS" starttime="20230103 13:05:55.611" endtime="20230103 13:05:55.615"/>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<var>${configlist}</var>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20230103 13:05:55.621" level="INFO">${configlist} = []</msg>
+<status status="PASS" starttime="20230103 13:05:55.618" endtime="20230103 13:05:55.622"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${configlist}</arg>
+<arg>${InputFilePath}</arg>
+<arg>${EnquiryEmailBody}</arg>
+<arg>${FollowUpEmailBody}</arg>
+<arg>${TodayDate}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230103 13:05:55.624" endtime="20230103 13:05:55.628"/>
+</kw>
+<return>
+<value>${configlist}</value>
+<status status="PASS" starttime="20230103 13:05:55.630" endtime="20230103 13:05:55.631"/>
+</return>
+<status status="PASS" starttime="20230103 13:05:55.600" endtime="20230103 13:05:55.632"/>
+</iter>
+<status status="PASS" starttime="20230103 13:05:55.598" endtime="20230103 13:05:55.633"/>
+</for>
+<msg timestamp="20230103 13:05:55.635" level="INFO">${configlist} = ['C:\\Users\\ashok.panda\\Documents\\Robocorp\\OPP TRACKER\\Opportunity tracker_Remainder.xlsx', 'Dear  &lt;SalesExecName&gt; ,\n\nThis is an enquiry email for "&lt;proposal&gt;"  proposal\n\n\n\nRegards \nOpport...</msg>
+<status status="PASS" starttime="20230103 13:05:55.506" endtime="20230103 13:05:55.636"/>
+</kw>
+<kw name="Open Workbook" library="RPA.Excel.Files">
+<arg>${configlist}[0]</arg>
+<arg>overwrite=True</arg>
+<doc>Open an existing Excel workbook.</doc>
+<msg timestamp="20230103 13:05:55.639" level="INFO">Closing workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x000001BA2EC74A30&gt;</msg>
+<msg timestamp="20230103 13:05:55.704" level="INFO">Opened workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x000001BA2ED06F70&gt;</msg>
+<status status="PASS" starttime="20230103 13:05:55.637" endtime="20230103 13:05:55.705"/>
+</kw>
+<kw name="Read Worksheet As Table" library="RPA.Excel.Files">
+<var>${InputExcel}</var>
+<arg>header=True</arg>
+<doc>Read the contents of a worksheet into a Table container. Allows
+sorting/filtering/manipulating using the ``RPA.Tables`` library.</doc>
+<msg timestamp="20230103 13:05:55.713" level="INFO">Created table: Table(columns=['S.No', 'Proposal', 'Customer', 'Sales SPOC', 'Sales SPOC Email ID', 'Status', 'Communication Type', 'Follow Up Required', 'Follow Up Date', 'Reminder Frequency', 'Total no. of followup mail send'], rows=6)</msg>
+<msg timestamp="20230103 13:05:55.717" level="INFO">${InputExcel} = Table(columns=['S.No', 'Proposal', 'Customer', 'Sales SPOC', 'Sales SPOC Email ID', 'Status', 'Communication Type', 'Follow Up Required', 'Follow Up Date', 'Reminder Frequency', 'Total no. of followup...</msg>
+<status status="PASS" starttime="20230103 13:05:55.709" endtime="20230103 13:05:55.717"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>2</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:55.721" level="INFO">${rowCount} = 2</msg>
+<status status="PASS" starttime="20230103 13:05:55.719" endtime="20230103 13:05:55.721"/>
+</kw>
+<kw name="Opportunity Tracker main task">
+<arg>${InputExcel}</arg>
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<try>
+<branch type="TRY">
+<for flavor="IN">
+<var>${row}</var>
+<value>@{InputExcel}</value>
+<iter>
+<var name="${row}">{'S.No': 1, 'Proposal': 'China - Finance AR Process', 'Customer': 'Baxter', 'Sales SPOC': 'Abhay', 'Sales SPOC Email ID': 'abhay.bhan@yash.com', 'Status': 'Sales Dependency', 'Communication Type': 'En...</var>
+<kw name="Log" library="BuiltIn">
+<arg>${row}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:55.785" level="INFO">{'S.No': 1, 'Proposal': 'China - Finance AR Process', 'Customer': 'Baxter', 'Sales SPOC': 'Abhay', 'Sales SPOC Email ID': 'abhay.bhan@yash.com', 'Status': 'Sales Dependency', 'Communication Type': 'Enquiry', 'Follow Up Required': 'Yes', 'Follow Up Date': datetime.datetime(2023, 1, 1, 0, 0), 'Reminder Frequency': 2, 'Total no. of followup mail send': 1}</msg>
+<status status="PASS" starttime="20230103 13:05:55.732" endtime="20230103 13:05:55.785"/>
+</kw>
+<kw name="Getting Single Client Data">
+<var>${client data list}</var>
+<arg>${row}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${customer}</var>
+<arg>${row}[Customer]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:55.794" level="INFO">${customer} = Baxter</msg>
+<status status="PASS" starttime="20230103 13:05:55.790" endtime="20230103 13:05:55.795"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${proposal}</var>
+<arg>${row}[Proposal]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:55.798" level="INFO">${proposal} = China - Finance AR Process</msg>
+<status status="PASS" starttime="20230103 13:05:55.796" endtime="20230103 13:05:55.798"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${SalesRep}</var>
+<arg>${row}[Sales SPOC]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:55.801" level="INFO">${SalesRep} = Abhay</msg>
+<status status="PASS" starttime="20230103 13:05:55.800" endtime="20230103 13:05:55.801"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${SalesRepEmail}</var>
+<arg>${row}[Sales SPOC Email ID]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:55.802" level="INFO">${SalesRepEmail} = abhay.bhan@yash.com</msg>
+<status status="PASS" starttime="20230103 13:05:55.801" endtime="20230103 13:05:55.802"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${Status}</var>
+<arg>${row}[Status]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:55.807" level="INFO">${Status} = Sales Dependency</msg>
+<status status="PASS" starttime="20230103 13:05:55.802" endtime="20230103 13:05:55.807"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${CommunicationType}</var>
+<arg>${row}[Communication Type]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:55.815" level="INFO">${CommunicationType} = Enquiry</msg>
+<status status="PASS" starttime="20230103 13:05:55.810" endtime="20230103 13:05:55.816"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${FollowUpDate}</var>
+<arg>${row}[Follow Up Date]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:55.821" level="INFO">${FollowUpDate} = 2023-01-01 00:00:00</msg>
+<status status="PASS" starttime="20230103 13:05:55.819" endtime="20230103 13:05:55.822"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ReminderFrequency}</var>
+<arg>${row}[Reminder Frequency]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:55.823" level="INFO">${ReminderFrequency} = 2</msg>
+<status status="PASS" starttime="20230103 13:05:55.822" endtime="20230103 13:05:55.824"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${followup_Required}</var>
+<arg>${row}[Follow Up Required]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:55.856" level="INFO">${followup_Required} = Yes</msg>
+<status status="PASS" starttime="20230103 13:05:55.826" endtime="20230103 13:05:55.857"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${TotalFollowupMail}</var>
+<arg>${row}[Total no. of followup mail send]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:55.869" level="INFO">${TotalFollowupMail} = 1</msg>
+<status status="PASS" starttime="20230103 13:05:55.859" endtime="20230103 13:05:55.870"/>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<var>${client data list}</var>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20230103 13:05:55.872" level="INFO">${client data list} = []</msg>
+<status status="PASS" starttime="20230103 13:05:55.870" endtime="20230103 13:05:55.872"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${client data list}</arg>
+<arg>${customer}</arg>
+<arg>${proposal}</arg>
+<arg>${SalesRep}</arg>
+<arg>${SalesRepEmail}</arg>
+<arg>${Status}</arg>
+<arg>${CommunicationType}</arg>
+<arg>${FollowUpDate}</arg>
+<arg>${ReminderFrequency}</arg>
+<arg>${followup_Required}</arg>
+<arg>${TotalFollowupMail}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230103 13:05:55.874" endtime="20230103 13:05:55.880"/>
+</kw>
+<return>
+<value>${client data list}</value>
+<status status="PASS" starttime="20230103 13:05:55.880" endtime="20230103 13:05:55.881"/>
+</return>
+<msg timestamp="20230103 13:05:55.882" level="INFO">${client data list} = ['Baxter', 'China - Finance AR Process', 'Abhay', 'abhay.bhan@yash.com', 'Sales Dependency', 'Enquiry', datetime.datetime(2023, 1, 1, 0, 0), 2, 'Yes', 1]</msg>
+<status status="PASS" starttime="20230103 13:05:55.786" endtime="20230103 13:05:55.882"/>
+</kw>
+<if>
+<branch type="IF" condition="&quot;${client data list}[4]&quot; == &quot;Sales Dependency&quot;">
+<kw name="Log" library="BuiltIn">
+<arg>Proceed further</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:55.885" level="INFO">Proceed further</msg>
+<status status="PASS" starttime="20230103 13:05:55.884" endtime="20230103 13:05:55.886"/>
+</kw>
+<if>
+<branch type="IF" condition="&quot;${client data list}[8]&quot; == &quot;Yes&quot;">
+<kw name="Log" library="BuiltIn">
+<arg>Proceed Further</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:55.901" level="INFO">Proceed Further</msg>
+<status status="PASS" starttime="20230103 13:05:55.894" endtime="20230103 13:05:55.902"/>
+</kw>
+<kw name="Converting Current,FollowUp and Calculated Dates">
+<var>${FollowUpDateFiltered}</var>
+<var>${TodayFilteredDate}</var>
+<arg>${client data list}</arg>
+<arg>${configlist}</arg>
+<arg>${CalculatedDate}</arg>
+<kw name="Convert Date" library="DateTime">
+<var>${FollowUpDateFiltered}</var>
+<arg>${client data list}[6]</arg>
+<arg>result_format=%d-%m-%Y</arg>
+<doc>Converts between supported `date formats`.</doc>
+<msg timestamp="20230103 13:05:55.914" level="INFO">${FollowUpDateFiltered} = 01-01-2023</msg>
+<status status="PASS" starttime="20230103 13:05:55.910" endtime="20230103 13:05:55.915"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${FollowUpDateFiltered}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:55.918" level="INFO">01-01-2023</msg>
+<status status="PASS" starttime="20230103 13:05:55.916" endtime="20230103 13:05:55.919"/>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<var>${TodayFilteredDate}</var>
+<arg>${configlist}[3]</arg>
+<arg>result_format=%d-%m-%Y</arg>
+<doc>Converts between supported `date formats`.</doc>
+<msg timestamp="20230103 13:05:55.992" level="INFO">${TodayFilteredDate} = 03-01-2023</msg>
+<status status="PASS" starttime="20230103 13:05:55.919" endtime="20230103 13:05:55.993"/>
+</kw>
+<return>
+<value>${FollowUpDateFiltered}</value>
+<value>${TodayFilteredDate}</value>
+<status status="PASS" starttime="20230103 13:05:55.995" endtime="20230103 13:05:55.996"/>
+</return>
+<msg timestamp="20230103 13:05:55.998" level="INFO">${FollowUpDateFiltered} = 01-01-2023</msg>
+<msg timestamp="20230103 13:05:56.001" level="INFO">${TodayFilteredDate} = 03-01-2023</msg>
+<status status="PASS" starttime="20230103 13:05:55.905" endtime="20230103 13:05:56.005"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${followupdateStr}</var>
+<arg>${FollowUpDateFiltered}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20230103 13:05:56.015" level="INFO">${followupdateStr} = 01-01-2023</msg>
+<status status="PASS" starttime="20230103 13:05:56.009" endtime="20230103 13:05:56.015"/>
+</kw>
+<kw name="Is Weekend" library="DateLogic">
+<var>${CalculatedDate}</var>
+<arg>${followupdateStr}</arg>
+<arg>${client data list}[7]</arg>
+<msg timestamp="20230103 13:05:56.022" level="INFO">1
+Weekday   1
+2023-01-03 00:00:00</msg>
+<msg timestamp="20230103 13:05:56.024" level="INFO">${CalculatedDate} = 2023-01-03 00:00:00</msg>
+<status status="PASS" starttime="20230103 13:05:56.020" endtime="20230103 13:05:56.028"/>
+</kw>
+<kw name="Coverting Calculated Date">
+<var>${CalculatedDateFiltered}</var>
+<arg>${client data list}</arg>
+<arg>${configlist}</arg>
+<arg>${CalculatedDate}</arg>
+<kw name="Convert Date" library="DateTime">
+<var>${CalculatedDateFiltered}</var>
+<arg>${CalculatedDate}</arg>
+<arg>result_format=%d-%m-%Y</arg>
+<doc>Converts between supported `date formats`.</doc>
+<msg timestamp="20230103 13:05:56.037" level="INFO">${CalculatedDateFiltered} = 03-01-2023</msg>
+<status status="PASS" starttime="20230103 13:05:56.034" endtime="20230103 13:05:56.038"/>
+</kw>
+<return>
+<value>${CalculatedDateFiltered}</value>
+<status status="PASS" starttime="20230103 13:05:56.038" endtime="20230103 13:05:56.038"/>
+</return>
+<msg timestamp="20230103 13:05:56.040" level="INFO">${CalculatedDateFiltered} = 03-01-2023</msg>
+<status status="PASS" starttime="20230103 13:05:56.029" endtime="20230103 13:05:56.040"/>
+</kw>
+<if>
+<branch type="IF" condition="'${FollowUpDateFiltered}' == '${TodayFilteredDate}'">
+<kw name="Log" library="BuiltIn">
+<arg>Dates are equal</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:56.045" endtime="20230103 13:05:56.049"/>
+</kw>
+<kw name="checking Communication Type and sending mail">
+<arg>${configlist}</arg>
+<arg>${client data list}</arg>
+<arg>${rowCount}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:56.050" endtime="20230103 13:05:56.050"/>
+</kw>
+<kw name="Updating followup date as Calculated date In excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:56.051" endtime="20230103 13:05:56.051"/>
+</kw>
+<kw name="Total Folowup Counter">
+<arg>${client data list}</arg>
+<arg>${rowcount}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:56.052" endtime="20230103 13:05:56.054"/>
+</kw>
+<if>
+<branch type="IF" condition="'${TodayFilteredDate}' == '${CalculatedDateFiltered}'">
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:56.055" endtime="20230103 13:05:56.059"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:56.054" endtime="20230103 13:05:56.061"/>
+</branch>
+<branch type="ELSE">
+<kw name="Updating followup date as Calculated date In excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:56.065" endtime="20230103 13:05:56.068"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:56.070" endtime="20230103 13:05:56.072"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:56.063" endtime="20230103 13:05:56.073"/>
+</branch>
+<status status="NOT RUN" starttime="20230103 13:05:56.054" endtime="20230103 13:05:56.074"/>
+</if>
+<status status="NOT RUN" starttime="20230103 13:05:56.043" endtime="20230103 13:05:56.074"/>
+</branch>
+<branch type="ELSE IF" condition="'${TodayFilteredDate}' &lt; '${FollowUpDateFiltered}'">
+<kw name="Log" library="BuiltIn">
+<arg>${TodayFilteredDate}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:56.080" endtime="20230103 13:05:56.082"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${FollowUpDateFiltered}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:56.083" endtime="20230103 13:05:56.083"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>FollowUpdate date is greater than current date</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:56.084" endtime="20230103 13:05:56.084"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:56.084" endtime="20230103 13:05:56.085"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:56.075" endtime="20230103 13:05:56.085"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>FollowUpDate date is smaller than current date</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:56.090" level="INFO">FollowUpDate date is smaller than current date</msg>
+<status status="PASS" starttime="20230103 13:05:56.088" endtime="20230103 13:05:56.092"/>
+</kw>
+<if>
+<branch type="IF" condition="'${CalculatedDateFiltered}' == '${TodayFilteredDate}'">
+<kw name="Updating followup date as Calculated date In excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<try>
+<branch type="TRY">
+<kw name="Open Workbook" library="RPA.Excel.Files">
+<arg>${configlist}[0]</arg>
+<arg>overwrite=True</arg>
+<doc>Open an existing Excel workbook.</doc>
+<msg timestamp="20230103 13:05:56.107" level="INFO">Closing workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x000001BA2ED06F70&gt;</msg>
+<msg timestamp="20230103 13:05:56.190" level="INFO">Opened workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x000001BA2ED06F70&gt;</msg>
+<status status="PASS" starttime="20230103 13:05:56.105" endtime="20230103 13:05:56.191"/>
+</kw>
+<status status="PASS" starttime="20230103 13:05:56.103" endtime="20230103 13:05:56.194"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" library="BuiltIn">
+<arg>Writing Excel Option</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:56.200" endtime="20230103 13:05:56.203"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:56.196" endtime="20230103 13:05:56.204"/>
+</branch>
+<branch type="ELSE">
+<kw name="Set Cell Value" library="RPA.Excel.Files">
+<arg>${rowCount}</arg>
+<arg>I</arg>
+<arg>${CalculatedDate}</arg>
+<doc>Set a cell value in the given worksheet.</doc>
+<status status="PASS" starttime="20230103 13:05:56.207" endtime="20230103 13:05:56.210"/>
+</kw>
+<kw name="Save Workbook" library="RPA.Excel.Files">
+<doc>Save the active workbook.</doc>
+<status status="PASS" starttime="20230103 13:05:56.212" endtime="20230103 13:05:56.436"/>
+</kw>
+<status status="PASS" starttime="20230103 13:05:56.205" endtime="20230103 13:05:56.439"/>
+</branch>
+<status status="PASS" starttime="20230103 13:05:56.103" endtime="20230103 13:05:56.440"/>
+</try>
+<status status="PASS" starttime="20230103 13:05:56.099" endtime="20230103 13:05:56.442"/>
+</kw>
+<kw name="checking Communication Type and sending mail">
+<arg>${configlist}</arg>
+<arg>${client data list}</arg>
+<arg>${rowCount}</arg>
+<if>
+<branch type="IF" condition="&quot;${client data list}[5]&quot; == &quot;Enquiry&quot;">
+<kw name="Enquiry Process">
+<arg>${client data list}</arg>
+<arg>${configlist}</arg>
+<kw name="Replace String" library="String">
+<var>${EnquiryEmailBody}</var>
+<arg>${configlist}[2]</arg>
+<arg>&lt;SalesExecName&gt;</arg>
+<arg>${client data list}[2]</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20230103 13:05:56.466" level="INFO">${EnquiryEmailBody} = Dear  Abhay ,
+
+This is a follow up email for "&lt;proposal&gt;"   proposal
+
+
+
+Regards 
+Opportunity Bot</msg>
+<status status="PASS" starttime="20230103 13:05:56.459" endtime="20230103 13:05:56.467"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${EnquiryEmailBody}</var>
+<arg>${EnquiryEmailBody}</arg>
+<arg>&lt;proposal&gt;</arg>
+<arg>${client data list}[1]</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20230103 13:05:56.473" level="INFO">${EnquiryEmailBody} = Dear  Abhay ,
+
+This is a follow up email for "China - Finance AR Process"   proposal
+
+
+
+Regards 
+Opportunity Bot</msg>
+<status status="PASS" starttime="20230103 13:05:56.470" endtime="20230103 13:05:56.474"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${configlist}[2]</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:56.479" level="INFO">Dear  &lt;SalesExecName&gt; ,
+
+This is a follow up email for "&lt;proposal&gt;"   proposal
+
+
+
+Regards 
+Opportunity Bot</msg>
+<status status="PASS" starttime="20230103 13:05:56.476" endtime="20230103 13:05:56.480"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${client data list}[3]</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:56.484" level="INFO">abhay.bhan@yash.com</msg>
+<status status="PASS" starttime="20230103 13:05:56.482" endtime="20230103 13:05:56.485"/>
+</kw>
+<kw name="Send Email" library="RPA.Outlook.Application">
+<arg>recipients=${client data list}[3]</arg>
+<arg>subject=${client data list}[1]</arg>
+<arg>body=${EnquiryEmailBody}</arg>
+<doc>Send email with Outlook</doc>
+<status status="PASS" starttime="20230103 13:05:56.486" endtime="20230103 13:05:56.697"/>
+</kw>
+<status status="PASS" starttime="20230103 13:05:56.455" endtime="20230103 13:05:56.698"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>enquiry email should be sent</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:56.702" level="INFO">enquiry email should be sent</msg>
+<status status="PASS" starttime="20230103 13:05:56.700" endtime="20230103 13:05:56.703"/>
+</kw>
+<status status="PASS" starttime="20230103 13:05:56.450" endtime="20230103 13:05:56.704"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${client data list}[5]&quot; == &quot;Follow Up&quot;">
+<kw name="Follow up Process">
+<arg>${client data list}</arg>
+<arg>${configlist}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:56.706" endtime="20230103 13:05:56.708"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>follow up email should be sent</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:56.709" endtime="20230103 13:05:56.710"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:56.704" endtime="20230103 13:05:56.710"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>No communication needed</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:56.714" endtime="20230103 13:05:56.715"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:56.711" endtime="20230103 13:05:56.716"/>
+</branch>
+<status status="PASS" starttime="20230103 13:05:56.448" endtime="20230103 13:05:56.716"/>
+</if>
+<status status="PASS" starttime="20230103 13:05:56.443" endtime="20230103 13:05:56.717"/>
+</kw>
+<kw name="Total Folowup Counter">
+<arg>${client data list}</arg>
+<arg>${rowCount}</arg>
+<if>
+<branch type="IF" condition="&quot;${client data list}[9]&quot; == &quot;None&quot;">
+<kw name="Open Workbook" library="RPA.Excel.Files">
+<arg>Opportunity tracker_Remainder.xlsx</arg>
+<doc>Open an existing Excel workbook.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:56.725" endtime="20230103 13:05:56.726"/>
+</kw>
+<kw name="Set Cell Value" library="RPA.Excel.Files">
+<arg>${rowcount}</arg>
+<arg>K</arg>
+<arg>1</arg>
+<doc>Set a cell value in the given worksheet.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:56.729" endtime="20230103 13:05:56.730"/>
+</kw>
+<kw name="Save Workbook" library="RPA.Excel.Files">
+<doc>Save the active workbook.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:56.731" endtime="20230103 13:05:56.731"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowcount}</var>
+<arg>${rowcount} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:56.731" endtime="20230103 13:05:56.732"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:56.723" endtime="20230103 13:05:56.732"/>
+</branch>
+<branch type="ELSE">
+<kw name="Evaluate" library="BuiltIn">
+<var>${TotalFollowupMail}</var>
+<arg>${client data list}[9] + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230103 13:05:56.737" level="INFO">${TotalFollowupMail} = 2</msg>
+<status status="PASS" starttime="20230103 13:05:56.735" endtime="20230103 13:05:56.738"/>
+</kw>
+<kw name="Set Cell Value" library="RPA.Excel.Files">
+<arg>${rowcount}</arg>
+<arg>K</arg>
+<arg>${TotalFollowupMail}</arg>
+<doc>Set a cell value in the given worksheet.</doc>
+<status status="PASS" starttime="20230103 13:05:56.740" endtime="20230103 13:05:56.744"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${TotalFollowupMail}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:56.750" level="INFO">2</msg>
+<status status="PASS" starttime="20230103 13:05:56.746" endtime="20230103 13:05:56.751"/>
+</kw>
+<kw name="Save Workbook" library="RPA.Excel.Files">
+<doc>Save the active workbook.</doc>
+<status status="PASS" starttime="20230103 13:05:56.752" endtime="20230103 13:05:56.882"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowcount}</var>
+<arg>${rowcount} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230103 13:05:56.886" level="INFO">${rowcount} = 3</msg>
+<status status="PASS" starttime="20230103 13:05:56.882" endtime="20230103 13:05:56.886"/>
+</kw>
+<status status="PASS" starttime="20230103 13:05:56.733" endtime="20230103 13:05:56.887"/>
+</branch>
+<status status="PASS" starttime="20230103 13:05:56.722" endtime="20230103 13:05:56.887"/>
+</if>
+<status status="PASS" starttime="20230103 13:05:56.718" endtime="20230103 13:05:56.888"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230103 13:05:56.891" level="INFO">${rowCount} = 3</msg>
+<status status="PASS" starttime="20230103 13:05:56.889" endtime="20230103 13:05:56.892"/>
+</kw>
+<status status="PASS" starttime="20230103 13:05:56.098" endtime="20230103 13:05:56.893"/>
+</branch>
+<branch type="ELSE IF" condition="'${CalculatedDateFiltered}' &gt; '${TodayFilteredDate}'">
+<kw name="Updating followup date as Calculated date In excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:56.895" endtime="20230103 13:05:56.897"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:56.900" endtime="20230103 13:05:56.901"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:56.893" endtime="20230103 13:05:56.902"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Both Followup date and Calculated Followup has been Passed</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:56.903" endtime="20230103 13:05:56.904"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:56.905" endtime="20230103 13:05:56.905"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:56.903" endtime="20230103 13:05:56.906"/>
+</branch>
+<status status="PASS" starttime="20230103 13:05:56.097" endtime="20230103 13:05:56.906"/>
+</if>
+<status status="PASS" starttime="20230103 13:05:56.086" endtime="20230103 13:05:56.906"/>
+</branch>
+<status status="PASS" starttime="20230103 13:05:56.041" endtime="20230103 13:05:56.907"/>
+</if>
+<status status="PASS" starttime="20230103 13:05:55.890" endtime="20230103 13:05:56.907"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Follow up required is No</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:56.911" endtime="20230103 13:05:56.912"/>
+</kw>
+<kw name="Emptying Cell from excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:56.914" endtime="20230103 13:05:56.915"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:56.917" endtime="20230103 13:05:56.918"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:56.910" endtime="20230103 13:05:56.919"/>
+</branch>
+<status status="PASS" starttime="20230103 13:05:55.888" endtime="20230103 13:05:56.920"/>
+</if>
+<status status="PASS" starttime="20230103 13:05:55.883" endtime="20230103 13:05:56.920"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>No sales Dependancy</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:56.922" endtime="20230103 13:05:56.923"/>
+</kw>
+<kw name="Emptying Cell from excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:56.925" endtime="20230103 13:05:56.927"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:56.929" endtime="20230103 13:05:56.930"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:56.921" endtime="20230103 13:05:56.931"/>
+</branch>
+<status status="PASS" starttime="20230103 13:05:55.882" endtime="20230103 13:05:56.932"/>
+</if>
+<status status="PASS" starttime="20230103 13:05:55.731" endtime="20230103 13:05:56.932"/>
+</iter>
+<iter>
+<var name="${row}">{'S.No': 2, 'Proposal': 'Refactoring Existing - Invoice Processing', 'Customer': 'Arcelor', 'Sales SPOC': 'Ashok', 'Sales SPOC Email ID': 'ashok.panda@yash.com', 'Status': 'Sales Dependency', 'Communi...</var>
+<kw name="Log" library="BuiltIn">
+<arg>${row}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:56.937" level="INFO">{'S.No': 2, 'Proposal': 'Refactoring Existing - Invoice Processing', 'Customer': 'Arcelor', 'Sales SPOC': 'Ashok', 'Sales SPOC Email ID': 'ashok.panda@yash.com', 'Status': 'Sales Dependency', 'Communication Type': 'Follow Up', 'Follow Up Required': 'Yes', 'Follow Up Date': datetime.datetime(2023, 1, 2, 0, 0), 'Reminder Frequency': 1, 'Total no. of followup mail send': None}</msg>
+<status status="PASS" starttime="20230103 13:05:56.935" endtime="20230103 13:05:56.938"/>
+</kw>
+<kw name="Getting Single Client Data">
+<var>${client data list}</var>
+<arg>${row}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${customer}</var>
+<arg>${row}[Customer]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:56.948" level="INFO">${customer} = Arcelor</msg>
+<status status="PASS" starttime="20230103 13:05:56.943" endtime="20230103 13:05:56.950"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${proposal}</var>
+<arg>${row}[Proposal]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:56.953" level="INFO">${proposal} = Refactoring Existing - Invoice Processing</msg>
+<status status="PASS" starttime="20230103 13:05:56.951" endtime="20230103 13:05:56.954"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${SalesRep}</var>
+<arg>${row}[Sales SPOC]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:56.959" level="INFO">${SalesRep} = Ashok</msg>
+<status status="PASS" starttime="20230103 13:05:56.956" endtime="20230103 13:05:56.959"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${SalesRepEmail}</var>
+<arg>${row}[Sales SPOC Email ID]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:56.964" level="INFO">${SalesRepEmail} = ashok.panda@yash.com</msg>
+<status status="PASS" starttime="20230103 13:05:56.961" endtime="20230103 13:05:56.965"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${Status}</var>
+<arg>${row}[Status]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:56.971" level="INFO">${Status} = Sales Dependency</msg>
+<status status="PASS" starttime="20230103 13:05:56.968" endtime="20230103 13:05:56.972"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${CommunicationType}</var>
+<arg>${row}[Communication Type]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:56.978" level="INFO">${CommunicationType} = Follow Up</msg>
+<status status="PASS" starttime="20230103 13:05:56.973" endtime="20230103 13:05:56.978"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${FollowUpDate}</var>
+<arg>${row}[Follow Up Date]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:56.983" level="INFO">${FollowUpDate} = 2023-01-02 00:00:00</msg>
+<status status="PASS" starttime="20230103 13:05:56.980" endtime="20230103 13:05:56.984"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ReminderFrequency}</var>
+<arg>${row}[Reminder Frequency]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:56.988" level="INFO">${ReminderFrequency} = 1</msg>
+<status status="PASS" starttime="20230103 13:05:56.985" endtime="20230103 13:05:56.988"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${followup_Required}</var>
+<arg>${row}[Follow Up Required]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:56.993" level="INFO">${followup_Required} = Yes</msg>
+<status status="PASS" starttime="20230103 13:05:56.990" endtime="20230103 13:05:56.994"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${TotalFollowupMail}</var>
+<arg>${row}[Total no. of followup mail send]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:56.998" level="INFO">${TotalFollowupMail} = None</msg>
+<status status="PASS" starttime="20230103 13:05:56.996" endtime="20230103 13:05:56.999"/>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<var>${client data list}</var>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20230103 13:05:57.002" level="INFO">${client data list} = []</msg>
+<status status="PASS" starttime="20230103 13:05:57.000" endtime="20230103 13:05:57.002"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${client data list}</arg>
+<arg>${customer}</arg>
+<arg>${proposal}</arg>
+<arg>${SalesRep}</arg>
+<arg>${SalesRepEmail}</arg>
+<arg>${Status}</arg>
+<arg>${CommunicationType}</arg>
+<arg>${FollowUpDate}</arg>
+<arg>${ReminderFrequency}</arg>
+<arg>${followup_Required}</arg>
+<arg>${TotalFollowupMail}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230103 13:05:57.004" endtime="20230103 13:05:57.008"/>
+</kw>
+<return>
+<value>${client data list}</value>
+<status status="PASS" starttime="20230103 13:05:57.010" endtime="20230103 13:05:57.011"/>
+</return>
+<msg timestamp="20230103 13:05:57.013" level="INFO">${client data list} = ['Arcelor', 'Refactoring Existing - Invoice Processing', 'Ashok', 'ashok.panda@yash.com', 'Sales Dependency', 'Follow Up', datetime.datetime(2023, 1, 2, 0, 0), 1, 'Yes', None]</msg>
+<status status="PASS" starttime="20230103 13:05:56.939" endtime="20230103 13:05:57.014"/>
+</kw>
+<if>
+<branch type="IF" condition="&quot;${client data list}[4]&quot; == &quot;Sales Dependency&quot;">
+<kw name="Log" library="BuiltIn">
+<arg>Proceed further</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:57.021" level="INFO">Proceed further</msg>
+<status status="PASS" starttime="20230103 13:05:57.019" endtime="20230103 13:05:57.021"/>
+</kw>
+<if>
+<branch type="IF" condition="&quot;${client data list}[8]&quot; == &quot;Yes&quot;">
+<kw name="Log" library="BuiltIn">
+<arg>Proceed Further</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:57.031" level="INFO">Proceed Further</msg>
+<status status="PASS" starttime="20230103 13:05:57.030" endtime="20230103 13:05:57.032"/>
+</kw>
+<kw name="Converting Current,FollowUp and Calculated Dates">
+<var>${FollowUpDateFiltered}</var>
+<var>${TodayFilteredDate}</var>
+<arg>${client data list}</arg>
+<arg>${configlist}</arg>
+<arg>${CalculatedDate}</arg>
+<kw name="Convert Date" library="DateTime">
+<var>${FollowUpDateFiltered}</var>
+<arg>${client data list}[6]</arg>
+<arg>result_format=%d-%m-%Y</arg>
+<doc>Converts between supported `date formats`.</doc>
+<msg timestamp="20230103 13:05:57.041" level="INFO">${FollowUpDateFiltered} = 02-01-2023</msg>
+<status status="PASS" starttime="20230103 13:05:57.038" endtime="20230103 13:05:57.042"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${FollowUpDateFiltered}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:57.050" level="INFO">02-01-2023</msg>
+<status status="PASS" starttime="20230103 13:05:57.044" endtime="20230103 13:05:57.051"/>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<var>${TodayFilteredDate}</var>
+<arg>${configlist}[3]</arg>
+<arg>result_format=%d-%m-%Y</arg>
+<doc>Converts between supported `date formats`.</doc>
+<msg timestamp="20230103 13:05:57.056" level="INFO">${TodayFilteredDate} = 03-01-2023</msg>
+<status status="PASS" starttime="20230103 13:05:57.052" endtime="20230103 13:05:57.056"/>
+</kw>
+<return>
+<value>${FollowUpDateFiltered}</value>
+<value>${TodayFilteredDate}</value>
+<status status="PASS" starttime="20230103 13:05:57.057" endtime="20230103 13:05:57.059"/>
+</return>
+<msg timestamp="20230103 13:05:57.061" level="INFO">${FollowUpDateFiltered} = 02-01-2023</msg>
+<msg timestamp="20230103 13:05:57.062" level="INFO">${TodayFilteredDate} = 03-01-2023</msg>
+<status status="PASS" starttime="20230103 13:05:57.034" endtime="20230103 13:05:57.062"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${followupdateStr}</var>
+<arg>${FollowUpDateFiltered}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20230103 13:05:57.069" level="INFO">${followupdateStr} = 02-01-2023</msg>
+<status status="PASS" starttime="20230103 13:05:57.066" endtime="20230103 13:05:57.070"/>
+</kw>
+<kw name="Is Weekend" library="DateLogic">
+<var>${CalculatedDate}</var>
+<arg>${followupdateStr}</arg>
+<arg>${client data list}[7]</arg>
+<msg timestamp="20230103 13:05:57.074" level="INFO">1
+Weekday   1
+2023-01-03 00:00:00</msg>
+<msg timestamp="20230103 13:05:57.076" level="INFO">${CalculatedDate} = 2023-01-03 00:00:00</msg>
+<status status="PASS" starttime="20230103 13:05:57.071" endtime="20230103 13:05:57.076"/>
+</kw>
+<kw name="Coverting Calculated Date">
+<var>${CalculatedDateFiltered}</var>
+<arg>${client data list}</arg>
+<arg>${configlist}</arg>
+<arg>${CalculatedDate}</arg>
+<kw name="Convert Date" library="DateTime">
+<var>${CalculatedDateFiltered}</var>
+<arg>${CalculatedDate}</arg>
+<arg>result_format=%d-%m-%Y</arg>
+<doc>Converts between supported `date formats`.</doc>
+<msg timestamp="20230103 13:05:57.088" level="INFO">${CalculatedDateFiltered} = 03-01-2023</msg>
+<status status="PASS" starttime="20230103 13:05:57.084" endtime="20230103 13:05:57.089"/>
+</kw>
+<return>
+<value>${CalculatedDateFiltered}</value>
+<status status="PASS" starttime="20230103 13:05:57.089" endtime="20230103 13:05:57.091"/>
+</return>
+<msg timestamp="20230103 13:05:57.093" level="INFO">${CalculatedDateFiltered} = 03-01-2023</msg>
+<status status="PASS" starttime="20230103 13:05:57.077" endtime="20230103 13:05:57.094"/>
+</kw>
+<if>
+<branch type="IF" condition="'${FollowUpDateFiltered}' == '${TodayFilteredDate}'">
+<kw name="Log" library="BuiltIn">
+<arg>Dates are equal</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:57.101" endtime="20230103 13:05:57.101"/>
+</kw>
+<kw name="checking Communication Type and sending mail">
+<arg>${configlist}</arg>
+<arg>${client data list}</arg>
+<arg>${rowCount}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:57.102" endtime="20230103 13:05:57.104"/>
+</kw>
+<kw name="Updating followup date as Calculated date In excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:57.106" endtime="20230103 13:05:57.107"/>
+</kw>
+<kw name="Total Folowup Counter">
+<arg>${client data list}</arg>
+<arg>${rowcount}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:57.108" endtime="20230103 13:05:57.110"/>
+</kw>
+<if>
+<branch type="IF" condition="'${TodayFilteredDate}' == '${CalculatedDateFiltered}'">
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:57.114" endtime="20230103 13:05:57.117"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:57.111" endtime="20230103 13:05:57.118"/>
+</branch>
+<branch type="ELSE">
+<kw name="Updating followup date as Calculated date In excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:57.120" endtime="20230103 13:05:57.121"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:57.122" endtime="20230103 13:05:57.126"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:57.119" endtime="20230103 13:05:57.126"/>
+</branch>
+<status status="NOT RUN" starttime="20230103 13:05:57.111" endtime="20230103 13:05:57.129"/>
+</if>
+<status status="NOT RUN" starttime="20230103 13:05:57.098" endtime="20230103 13:05:57.129"/>
+</branch>
+<branch type="ELSE IF" condition="'${TodayFilteredDate}' &lt; '${FollowUpDateFiltered}'">
+<kw name="Log" library="BuiltIn">
+<arg>${TodayFilteredDate}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:57.136" endtime="20230103 13:05:57.137"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${FollowUpDateFiltered}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:57.138" endtime="20230103 13:05:57.139"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>FollowUpdate date is greater than current date</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:57.142" endtime="20230103 13:05:57.142"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:57.145" endtime="20230103 13:05:57.146"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:57.134" endtime="20230103 13:05:57.147"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>FollowUpDate date is smaller than current date</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:57.150" level="INFO">FollowUpDate date is smaller than current date</msg>
+<status status="PASS" starttime="20230103 13:05:57.148" endtime="20230103 13:05:57.151"/>
+</kw>
+<if>
+<branch type="IF" condition="'${CalculatedDateFiltered}' == '${TodayFilteredDate}'">
+<kw name="Updating followup date as Calculated date In excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<try>
+<branch type="TRY">
+<kw name="Open Workbook" library="RPA.Excel.Files">
+<arg>${configlist}[0]</arg>
+<arg>overwrite=True</arg>
+<doc>Open an existing Excel workbook.</doc>
+<msg timestamp="20230103 13:05:57.162" level="INFO">Closing workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x000001BA2ED06F70&gt;</msg>
+<msg timestamp="20230103 13:05:57.313" level="INFO">Opened workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x000001BA2ECD9940&gt;</msg>
+<status status="PASS" starttime="20230103 13:05:57.160" endtime="20230103 13:05:57.315"/>
+</kw>
+<status status="PASS" starttime="20230103 13:05:57.159" endtime="20230103 13:05:57.316"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" library="BuiltIn">
+<arg>Writing Excel Option</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:57.321" endtime="20230103 13:05:57.322"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:57.318" endtime="20230103 13:05:57.323"/>
+</branch>
+<branch type="ELSE">
+<kw name="Set Cell Value" library="RPA.Excel.Files">
+<arg>${rowCount}</arg>
+<arg>I</arg>
+<arg>${CalculatedDate}</arg>
+<doc>Set a cell value in the given worksheet.</doc>
+<status status="PASS" starttime="20230103 13:05:57.326" endtime="20230103 13:05:57.332"/>
+</kw>
+<kw name="Save Workbook" library="RPA.Excel.Files">
+<doc>Save the active workbook.</doc>
+<status status="PASS" starttime="20230103 13:05:57.334" endtime="20230103 13:05:57.581"/>
+</kw>
+<status status="PASS" starttime="20230103 13:05:57.325" endtime="20230103 13:05:57.583"/>
+</branch>
+<status status="PASS" starttime="20230103 13:05:57.159" endtime="20230103 13:05:57.584"/>
+</try>
+<status status="PASS" starttime="20230103 13:05:57.155" endtime="20230103 13:05:57.585"/>
+</kw>
+<kw name="checking Communication Type and sending mail">
+<arg>${configlist}</arg>
+<arg>${client data list}</arg>
+<arg>${rowCount}</arg>
+<if>
+<branch type="IF" condition="&quot;${client data list}[5]&quot; == &quot;Enquiry&quot;">
+<kw name="Enquiry Process">
+<arg>${client data list}</arg>
+<arg>${configlist}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:57.594" endtime="20230103 13:05:57.595"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>enquiry email should be sent</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:57.597" endtime="20230103 13:05:57.599"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:57.591" endtime="20230103 13:05:57.600"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${client data list}[5]&quot; == &quot;Follow Up&quot;">
+<kw name="Follow up Process">
+<arg>${client data list}</arg>
+<arg>${configlist}</arg>
+<kw name="Replace String" library="String">
+<var>${FollowUpEmailBody}</var>
+<arg>${configlist}[2]</arg>
+<arg>&lt;SalesExecName&gt;</arg>
+<arg>${client data list}[2]</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20230103 13:05:57.608" level="INFO">${FollowUpEmailBody} = Dear  Ashok ,
+
+This is a follow up email for "&lt;proposal&gt;"   proposal
+
+
+
+Regards 
+Opportunity Bot</msg>
+<status status="PASS" starttime="20230103 13:05:57.606" endtime="20230103 13:05:57.609"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${FollowUpEmailBody}</var>
+<arg>${FollowUpEmailBody}</arg>
+<arg>&lt;proposal&gt;</arg>
+<arg>${client data list}[1]</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20230103 13:05:57.611" level="INFO">${FollowUpEmailBody} = Dear  Ashok ,
+
+This is a follow up email for "Refactoring Existing - Invoice Processing"   proposal
+
+
+
+Regards 
+Opportunity Bot</msg>
+<status status="PASS" starttime="20230103 13:05:57.610" endtime="20230103 13:05:57.613"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${configlist}[2]</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:57.623" level="INFO">Dear  &lt;SalesExecName&gt; ,
+
+This is a follow up email for "&lt;proposal&gt;"   proposal
+
+
+
+Regards 
+Opportunity Bot</msg>
+<status status="PASS" starttime="20230103 13:05:57.614" endtime="20230103 13:05:57.624"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${client data list}[3]</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:57.631" level="INFO">ashok.panda@yash.com</msg>
+<status status="PASS" starttime="20230103 13:05:57.626" endtime="20230103 13:05:57.635"/>
+</kw>
+<kw name="Send Email" library="RPA.Outlook.Application">
+<arg>recipients=${client data list}[3]</arg>
+<arg>subject=${client data list}[1]</arg>
+<arg>body=${FollowUpEmailBody}</arg>
+<doc>Send email with Outlook</doc>
+<status status="PASS" starttime="20230103 13:05:57.637" endtime="20230103 13:05:57.725"/>
+</kw>
+<status status="PASS" starttime="20230103 13:05:57.603" endtime="20230103 13:05:57.729"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>follow up email should be sent</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:57.733" level="INFO">follow up email should be sent</msg>
+<status status="PASS" starttime="20230103 13:05:57.731" endtime="20230103 13:05:57.733"/>
+</kw>
+<status status="PASS" starttime="20230103 13:05:57.602" endtime="20230103 13:05:57.734"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>No communication needed</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:57.737" endtime="20230103 13:05:57.738"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:57.735" endtime="20230103 13:05:57.739"/>
+</branch>
+<status status="PASS" starttime="20230103 13:05:57.590" endtime="20230103 13:05:57.740"/>
+</if>
+<status status="PASS" starttime="20230103 13:05:57.586" endtime="20230103 13:05:57.741"/>
+</kw>
+<kw name="Total Folowup Counter">
+<arg>${client data list}</arg>
+<arg>${rowCount}</arg>
+<if>
+<branch type="IF" condition="&quot;${client data list}[9]&quot; == &quot;None&quot;">
+<kw name="Open Workbook" library="RPA.Excel.Files">
+<arg>Opportunity tracker_Remainder.xlsx</arg>
+<doc>Open an existing Excel workbook.</doc>
+<msg timestamp="20230103 13:05:57.751" level="INFO">Closing workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x000001BA2ECD9940&gt;</msg>
+<msg timestamp="20230103 13:05:57.855" level="INFO">Opened workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x000001BA2F00D880&gt;</msg>
+<status status="PASS" starttime="20230103 13:05:57.749" endtime="20230103 13:05:57.856"/>
+</kw>
+<kw name="Set Cell Value" library="RPA.Excel.Files">
+<arg>${rowcount}</arg>
+<arg>K</arg>
+<arg>1</arg>
+<doc>Set a cell value in the given worksheet.</doc>
+<status status="PASS" starttime="20230103 13:05:57.857" endtime="20230103 13:05:57.868"/>
+</kw>
+<kw name="Save Workbook" library="RPA.Excel.Files">
+<doc>Save the active workbook.</doc>
+<status status="PASS" starttime="20230103 13:05:57.870" endtime="20230103 13:05:58.064"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowcount}</var>
+<arg>${rowcount} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230103 13:05:58.069" level="INFO">${rowcount} = 4</msg>
+<status status="PASS" starttime="20230103 13:05:58.066" endtime="20230103 13:05:58.070"/>
+</kw>
+<status status="PASS" starttime="20230103 13:05:57.748" endtime="20230103 13:05:58.071"/>
+</branch>
+<branch type="ELSE">
+<kw name="Evaluate" library="BuiltIn">
+<var>${TotalFollowupMail}</var>
+<arg>${client data list}[9] + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.074" endtime="20230103 13:05:58.078"/>
+</kw>
+<kw name="Set Cell Value" library="RPA.Excel.Files">
+<arg>${rowcount}</arg>
+<arg>K</arg>
+<arg>${TotalFollowupMail}</arg>
+<doc>Set a cell value in the given worksheet.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.080" endtime="20230103 13:05:58.081"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${TotalFollowupMail}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.085" endtime="20230103 13:05:58.087"/>
+</kw>
+<kw name="Save Workbook" library="RPA.Excel.Files">
+<doc>Save the active workbook.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.090" endtime="20230103 13:05:58.091"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowcount}</var>
+<arg>${rowcount} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.092" endtime="20230103 13:05:58.094"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:58.072" endtime="20230103 13:05:58.096"/>
+</branch>
+<status status="PASS" starttime="20230103 13:05:57.747" endtime="20230103 13:05:58.097"/>
+</if>
+<status status="PASS" starttime="20230103 13:05:57.743" endtime="20230103 13:05:58.099"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230103 13:05:58.101" level="INFO">${rowCount} = 4</msg>
+<status status="PASS" starttime="20230103 13:05:58.100" endtime="20230103 13:05:58.103"/>
+</kw>
+<status status="PASS" starttime="20230103 13:05:57.152" endtime="20230103 13:05:58.103"/>
+</branch>
+<branch type="ELSE IF" condition="'${CalculatedDateFiltered}' &gt; '${TodayFilteredDate}'">
+<kw name="Updating followup date as Calculated date In excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:58.104" endtime="20230103 13:05:58.105"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.107" endtime="20230103 13:05:58.109"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:58.104" endtime="20230103 13:05:58.110"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Both Followup date and Calculated Followup has been Passed</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.112" endtime="20230103 13:05:58.114"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.115" endtime="20230103 13:05:58.116"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:58.111" endtime="20230103 13:05:58.116"/>
+</branch>
+<status status="PASS" starttime="20230103 13:05:57.151" endtime="20230103 13:05:58.118"/>
+</if>
+<status status="PASS" starttime="20230103 13:05:57.148" endtime="20230103 13:05:58.118"/>
+</branch>
+<status status="PASS" starttime="20230103 13:05:57.095" endtime="20230103 13:05:58.118"/>
+</if>
+<status status="PASS" starttime="20230103 13:05:57.024" endtime="20230103 13:05:58.120"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Follow up required is No</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.121" endtime="20230103 13:05:58.122"/>
+</kw>
+<kw name="Emptying Cell from excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:58.124" endtime="20230103 13:05:58.125"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.126" endtime="20230103 13:05:58.128"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:58.120" endtime="20230103 13:05:58.129"/>
+</branch>
+<status status="PASS" starttime="20230103 13:05:57.022" endtime="20230103 13:05:58.131"/>
+</if>
+<status status="PASS" starttime="20230103 13:05:57.018" endtime="20230103 13:05:58.131"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>No sales Dependancy</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.133" endtime="20230103 13:05:58.133"/>
+</kw>
+<kw name="Emptying Cell from excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:58.134" endtime="20230103 13:05:58.134"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.137" endtime="20230103 13:05:58.138"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:58.132" endtime="20230103 13:05:58.138"/>
+</branch>
+<status status="PASS" starttime="20230103 13:05:57.017" endtime="20230103 13:05:58.140"/>
+</if>
+<status status="PASS" starttime="20230103 13:05:56.933" endtime="20230103 13:05:58.140"/>
+</iter>
+<iter>
+<var name="${row}">{'S.No': 3, 'Proposal': 'Egypt National ID Search - AnyLine+Python', 'Customer': 'CNHi', 'Sales SPOC': 'ashwini', 'Sales SPOC Email ID': 'ashwini.mogal@yash.com', 'Status': 'Sales Dependency', 'Commun...</var>
+<kw name="Log" library="BuiltIn">
+<arg>${row}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:58.142" level="INFO">{'S.No': 3, 'Proposal': 'Egypt National ID Search - AnyLine+Python', 'Customer': 'CNHi', 'Sales SPOC': 'ashwini', 'Sales SPOC Email ID': 'ashwini.mogal@yash.com', 'Status': 'Sales Dependency', 'Communication Type': 'Enquiry', 'Follow Up Required': 'No', 'Follow Up Date': datetime.datetime(2023, 1, 2, 0, 0), 'Reminder Frequency': 4, 'Total no. of followup mail send': None}</msg>
+<status status="PASS" starttime="20230103 13:05:58.141" endtime="20230103 13:05:58.142"/>
+</kw>
+<kw name="Getting Single Client Data">
+<var>${client data list}</var>
+<arg>${row}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${customer}</var>
+<arg>${row}[Customer]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:58.147" level="INFO">${customer} = CNHi</msg>
+<status status="PASS" starttime="20230103 13:05:58.145" endtime="20230103 13:05:58.147"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${proposal}</var>
+<arg>${row}[Proposal]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:58.153" level="INFO">${proposal} = Egypt National ID Search - AnyLine+Python</msg>
+<status status="PASS" starttime="20230103 13:05:58.150" endtime="20230103 13:05:58.154"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${SalesRep}</var>
+<arg>${row}[Sales SPOC]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:58.158" level="INFO">${SalesRep} = ashwini</msg>
+<status status="PASS" starttime="20230103 13:05:58.155" endtime="20230103 13:05:58.159"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${SalesRepEmail}</var>
+<arg>${row}[Sales SPOC Email ID]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:58.164" level="INFO">${SalesRepEmail} = ashwini.mogal@yash.com</msg>
+<status status="PASS" starttime="20230103 13:05:58.161" endtime="20230103 13:05:58.165"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${Status}</var>
+<arg>${row}[Status]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:58.171" level="INFO">${Status} = Sales Dependency</msg>
+<status status="PASS" starttime="20230103 13:05:58.168" endtime="20230103 13:05:58.173"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${CommunicationType}</var>
+<arg>${row}[Communication Type]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:58.179" level="INFO">${CommunicationType} = Enquiry</msg>
+<status status="PASS" starttime="20230103 13:05:58.174" endtime="20230103 13:05:58.181"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${FollowUpDate}</var>
+<arg>${row}[Follow Up Date]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:58.187" level="INFO">${FollowUpDate} = 2023-01-02 00:00:00</msg>
+<status status="PASS" starttime="20230103 13:05:58.184" endtime="20230103 13:05:58.188"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ReminderFrequency}</var>
+<arg>${row}[Reminder Frequency]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:58.193" level="INFO">${ReminderFrequency} = 4</msg>
+<status status="PASS" starttime="20230103 13:05:58.189" endtime="20230103 13:05:58.193"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${followup_Required}</var>
+<arg>${row}[Follow Up Required]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:58.196" level="INFO">${followup_Required} = No</msg>
+<status status="PASS" starttime="20230103 13:05:58.195" endtime="20230103 13:05:58.198"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${TotalFollowupMail}</var>
+<arg>${row}[Total no. of followup mail send]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:58.202" level="INFO">${TotalFollowupMail} = None</msg>
+<status status="PASS" starttime="20230103 13:05:58.200" endtime="20230103 13:05:58.203"/>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<var>${client data list}</var>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20230103 13:05:58.206" level="INFO">${client data list} = []</msg>
+<status status="PASS" starttime="20230103 13:05:58.204" endtime="20230103 13:05:58.206"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${client data list}</arg>
+<arg>${customer}</arg>
+<arg>${proposal}</arg>
+<arg>${SalesRep}</arg>
+<arg>${SalesRepEmail}</arg>
+<arg>${Status}</arg>
+<arg>${CommunicationType}</arg>
+<arg>${FollowUpDate}</arg>
+<arg>${ReminderFrequency}</arg>
+<arg>${followup_Required}</arg>
+<arg>${TotalFollowupMail}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230103 13:05:58.208" endtime="20230103 13:05:58.212"/>
+</kw>
+<return>
+<value>${client data list}</value>
+<status status="PASS" starttime="20230103 13:05:58.214" endtime="20230103 13:05:58.215"/>
+</return>
+<msg timestamp="20230103 13:05:58.220" level="INFO">${client data list} = ['CNHi', 'Egypt National ID Search - AnyLine+Python', 'ashwini', 'ashwini.mogal@yash.com', 'Sales Dependency', 'Enquiry', datetime.datetime(2023, 1, 2, 0, 0), 4, 'No', None]</msg>
+<status status="PASS" starttime="20230103 13:05:58.143" endtime="20230103 13:05:58.221"/>
+</kw>
+<if>
+<branch type="IF" condition="&quot;${client data list}[4]&quot; == &quot;Sales Dependency&quot;">
+<kw name="Log" library="BuiltIn">
+<arg>Proceed further</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:58.224" level="INFO">Proceed further</msg>
+<status status="PASS" starttime="20230103 13:05:58.224" endtime="20230103 13:05:58.225"/>
+</kw>
+<if>
+<branch type="IF" condition="&quot;${client data list}[8]&quot; == &quot;Yes&quot;">
+<kw name="Log" library="BuiltIn">
+<arg>Proceed Further</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.227" endtime="20230103 13:05:58.227"/>
+</kw>
+<kw name="Converting Current,FollowUp and Calculated Dates">
+<var>${FollowUpDateFiltered}</var>
+<var>${TodayFilteredDate}</var>
+<arg>${client data list}</arg>
+<arg>${configlist}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:58.236" endtime="20230103 13:05:58.238"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${followupdateStr}</var>
+<arg>${FollowUpDateFiltered}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.239" endtime="20230103 13:05:58.240"/>
+</kw>
+<kw name="Is Weekend" library="DateLogic">
+<var>${CalculatedDate}</var>
+<arg>${followupdateStr}</arg>
+<arg>${client data list}[7]</arg>
+<status status="NOT RUN" starttime="20230103 13:05:58.241" endtime="20230103 13:05:58.242"/>
+</kw>
+<kw name="Coverting Calculated Date">
+<var>${CalculatedDateFiltered}</var>
+<arg>${client data list}</arg>
+<arg>${configlist}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:58.243" endtime="20230103 13:05:58.245"/>
+</kw>
+<if>
+<branch type="IF" condition="'${FollowUpDateFiltered}' == '${TodayFilteredDate}'">
+<kw name="Log" library="BuiltIn">
+<arg>Dates are equal</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.250" endtime="20230103 13:05:58.250"/>
+</kw>
+<kw name="checking Communication Type and sending mail">
+<arg>${configlist}</arg>
+<arg>${client data list}</arg>
+<arg>${rowCount}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:58.251" endtime="20230103 13:05:58.253"/>
+</kw>
+<kw name="Updating followup date as Calculated date In excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:58.254" endtime="20230103 13:05:58.255"/>
+</kw>
+<kw name="Total Folowup Counter">
+<arg>${client data list}</arg>
+<arg>${rowcount}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:58.257" endtime="20230103 13:05:58.257"/>
+</kw>
+<if>
+<branch type="IF" condition="'${TodayFilteredDate}' == '${CalculatedDateFiltered}'">
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.262" endtime="20230103 13:05:58.265"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:58.260" endtime="20230103 13:05:58.268"/>
+</branch>
+<branch type="ELSE">
+<kw name="Updating followup date as Calculated date In excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:58.271" endtime="20230103 13:05:58.272"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.274" endtime="20230103 13:05:58.276"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:58.269" endtime="20230103 13:05:58.277"/>
+</branch>
+<status status="NOT RUN" starttime="20230103 13:05:58.258" endtime="20230103 13:05:58.278"/>
+</if>
+<status status="NOT RUN" starttime="20230103 13:05:58.248" endtime="20230103 13:05:58.278"/>
+</branch>
+<branch type="ELSE IF" condition="'${TodayFilteredDate}' &lt; '${FollowUpDateFiltered}'">
+<kw name="Log" library="BuiltIn">
+<arg>${TodayFilteredDate}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.283" endtime="20230103 13:05:58.287"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${FollowUpDateFiltered}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.288" endtime="20230103 13:05:58.290"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>FollowUpdate date is greater than current date</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.296" endtime="20230103 13:05:58.298"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.302" endtime="20230103 13:05:58.303"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:58.279" endtime="20230103 13:05:58.304"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>FollowUpDate date is smaller than current date</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.310" endtime="20230103 13:05:58.313"/>
+</kw>
+<if>
+<branch type="IF" condition="'${CalculatedDateFiltered}' == '${TodayFilteredDate}'">
+<kw name="Updating followup date as Calculated date In excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:58.315" endtime="20230103 13:05:58.316"/>
+</kw>
+<kw name="checking Communication Type and sending mail">
+<arg>${configlist}</arg>
+<arg>${client data list}</arg>
+<arg>${rowCount}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:58.316" endtime="20230103 13:05:58.317"/>
+</kw>
+<kw name="Total Folowup Counter">
+<arg>${client data list}</arg>
+<arg>${rowCount}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:58.324" endtime="20230103 13:05:58.326"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.328" endtime="20230103 13:05:58.328"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:58.314" endtime="20230103 13:05:58.329"/>
+</branch>
+<branch type="ELSE IF" condition="'${CalculatedDateFiltered}' &gt; '${TodayFilteredDate}'">
+<kw name="Updating followup date as Calculated date In excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:58.330" endtime="20230103 13:05:58.331"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.332" endtime="20230103 13:05:58.333"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:58.329" endtime="20230103 13:05:58.334"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Both Followup date and Calculated Followup has been Passed</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.336" endtime="20230103 13:05:58.337"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.337" endtime="20230103 13:05:58.338"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:58.334" endtime="20230103 13:05:58.338"/>
+</branch>
+<status status="NOT RUN" starttime="20230103 13:05:58.314" endtime="20230103 13:05:58.340"/>
+</if>
+<status status="NOT RUN" starttime="20230103 13:05:58.305" endtime="20230103 13:05:58.340"/>
+</branch>
+<status status="NOT RUN" starttime="20230103 13:05:58.246" endtime="20230103 13:05:58.340"/>
+</if>
+<status status="NOT RUN" starttime="20230103 13:05:58.226" endtime="20230103 13:05:58.340"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Follow up required is No</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:58.344" level="INFO">Follow up required is No</msg>
+<status status="PASS" starttime="20230103 13:05:58.342" endtime="20230103 13:05:58.344"/>
+</kw>
+<kw name="Emptying Cell from excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<try>
+<branch type="TRY">
+<kw name="Open Workbook" library="RPA.Excel.Files">
+<arg>${configlist}[0]</arg>
+<arg>overwrite=True</arg>
+<doc>Open an existing Excel workbook.</doc>
+<msg timestamp="20230103 13:05:58.355" level="INFO">Closing workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x000001BA2F00D880&gt;</msg>
+<msg timestamp="20230103 13:05:58.478" level="INFO">Opened workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x000001BA2EE29B50&gt;</msg>
+<status status="PASS" starttime="20230103 13:05:58.352" endtime="20230103 13:05:58.480"/>
+</kw>
+<status status="PASS" starttime="20230103 13:05:58.350" endtime="20230103 13:05:58.481"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" library="BuiltIn">
+<arg>Writing Excel Option</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.484" endtime="20230103 13:05:58.486"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:58.482" endtime="20230103 13:05:58.487"/>
+</branch>
+<branch type="ELSE">
+<kw name="Set Cell Value" library="RPA.Excel.Files">
+<arg>${rowCount}</arg>
+<arg>K</arg>
+<arg>${EMPTY}</arg>
+<doc>Set a cell value in the given worksheet.</doc>
+<status status="PASS" starttime="20230103 13:05:58.496" endtime="20230103 13:05:58.502"/>
+</kw>
+<kw name="Save Workbook" library="RPA.Excel.Files">
+<doc>Save the active workbook.</doc>
+<status status="PASS" starttime="20230103 13:05:58.504" endtime="20230103 13:05:58.743"/>
+</kw>
+<status status="PASS" starttime="20230103 13:05:58.489" endtime="20230103 13:05:58.744"/>
+</branch>
+<status status="PASS" starttime="20230103 13:05:58.350" endtime="20230103 13:05:58.745"/>
+</try>
+<status status="PASS" starttime="20230103 13:05:58.345" endtime="20230103 13:05:58.745"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230103 13:05:58.750" level="INFO">${rowCount} = 5</msg>
+<status status="PASS" starttime="20230103 13:05:58.747" endtime="20230103 13:05:58.750"/>
+</kw>
+<status status="PASS" starttime="20230103 13:05:58.341" endtime="20230103 13:05:58.751"/>
+</branch>
+<status status="PASS" starttime="20230103 13:05:58.225" endtime="20230103 13:05:58.752"/>
+</if>
+<status status="PASS" starttime="20230103 13:05:58.223" endtime="20230103 13:05:58.752"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>No sales Dependancy</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.753" endtime="20230103 13:05:58.754"/>
+</kw>
+<kw name="Emptying Cell from excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:58.754" endtime="20230103 13:05:58.755"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.757" endtime="20230103 13:05:58.758"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:58.753" endtime="20230103 13:05:58.759"/>
+</branch>
+<status status="PASS" starttime="20230103 13:05:58.222" endtime="20230103 13:05:58.760"/>
+</if>
+<status status="PASS" starttime="20230103 13:05:58.140" endtime="20230103 13:05:58.760"/>
+</iter>
+<iter>
+<var name="${row}">{'S.No': 4, 'Proposal': 'Uipath/Power Automate License, Infra, Recruitment Automation', 'Customer': 'Google', 'Sales SPOC': 'ashok', 'Sales SPOC Email ID': 'ashok.panda@yash.com', 'Status': 'Sales Dep...</var>
+<kw name="Log" library="BuiltIn">
+<arg>${row}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:58.771" level="INFO">{'S.No': 4, 'Proposal': 'Uipath/Power Automate License, Infra, Recruitment Automation', 'Customer': 'Google', 'Sales SPOC': 'ashok', 'Sales SPOC Email ID': 'ashok.panda@yash.com', 'Status': 'Sales Dependency', 'Communication Type': 'Follow Up', 'Follow Up Required': 'No', 'Follow Up Date': datetime.datetime(2022, 12, 27, 0, 0), 'Reminder Frequency': 0, 'Total no. of followup mail send': None}</msg>
+<status status="PASS" starttime="20230103 13:05:58.767" endtime="20230103 13:05:58.776"/>
+</kw>
+<kw name="Getting Single Client Data">
+<var>${client data list}</var>
+<arg>${row}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${customer}</var>
+<arg>${row}[Customer]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:58.787" level="INFO">${customer} = Google</msg>
+<status status="PASS" starttime="20230103 13:05:58.784" endtime="20230103 13:05:58.788"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${proposal}</var>
+<arg>${row}[Proposal]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:58.792" level="INFO">${proposal} = Uipath/Power Automate License, Infra, Recruitment Automation</msg>
+<status status="PASS" starttime="20230103 13:05:58.789" endtime="20230103 13:05:58.793"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${SalesRep}</var>
+<arg>${row}[Sales SPOC]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:58.800" level="INFO">${SalesRep} = ashok</msg>
+<status status="PASS" starttime="20230103 13:05:58.796" endtime="20230103 13:05:58.800"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${SalesRepEmail}</var>
+<arg>${row}[Sales SPOC Email ID]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:58.804" level="INFO">${SalesRepEmail} = ashok.panda@yash.com</msg>
+<status status="PASS" starttime="20230103 13:05:58.803" endtime="20230103 13:05:58.805"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${Status}</var>
+<arg>${row}[Status]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:58.809" level="INFO">${Status} = Sales Dependency</msg>
+<status status="PASS" starttime="20230103 13:05:58.805" endtime="20230103 13:05:58.809"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${CommunicationType}</var>
+<arg>${row}[Communication Type]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:58.815" level="INFO">${CommunicationType} = Follow Up</msg>
+<status status="PASS" starttime="20230103 13:05:58.812" endtime="20230103 13:05:58.816"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${FollowUpDate}</var>
+<arg>${row}[Follow Up Date]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:58.821" level="INFO">${FollowUpDate} = 2022-12-27 00:00:00</msg>
+<status status="PASS" starttime="20230103 13:05:58.818" endtime="20230103 13:05:58.822"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ReminderFrequency}</var>
+<arg>${row}[Reminder Frequency]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:58.831" level="INFO">${ReminderFrequency} = 0</msg>
+<status status="PASS" starttime="20230103 13:05:58.824" endtime="20230103 13:05:58.831"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${followup_Required}</var>
+<arg>${row}[Follow Up Required]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:58.835" level="INFO">${followup_Required} = No</msg>
+<status status="PASS" starttime="20230103 13:05:58.833" endtime="20230103 13:05:58.836"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${TotalFollowupMail}</var>
+<arg>${row}[Total no. of followup mail send]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:58.840" level="INFO">${TotalFollowupMail} = None</msg>
+<status status="PASS" starttime="20230103 13:05:58.838" endtime="20230103 13:05:58.841"/>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<var>${client data list}</var>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20230103 13:05:58.846" level="INFO">${client data list} = []</msg>
+<status status="PASS" starttime="20230103 13:05:58.843" endtime="20230103 13:05:58.848"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${client data list}</arg>
+<arg>${customer}</arg>
+<arg>${proposal}</arg>
+<arg>${SalesRep}</arg>
+<arg>${SalesRepEmail}</arg>
+<arg>${Status}</arg>
+<arg>${CommunicationType}</arg>
+<arg>${FollowUpDate}</arg>
+<arg>${ReminderFrequency}</arg>
+<arg>${followup_Required}</arg>
+<arg>${TotalFollowupMail}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230103 13:05:58.851" endtime="20230103 13:05:58.855"/>
+</kw>
+<return>
+<value>${client data list}</value>
+<status status="PASS" starttime="20230103 13:05:58.859" endtime="20230103 13:05:58.860"/>
+</return>
+<msg timestamp="20230103 13:05:58.862" level="INFO">${client data list} = ['Google', 'Uipath/Power Automate License, Infra, Recruitment Automation', 'ashok', 'ashok.panda@yash.com', 'Sales Dependency', 'Follow Up', datetime.datetime(2022, 12, 27, 0, 0), 0, 'No', None]</msg>
+<status status="PASS" starttime="20230103 13:05:58.778" endtime="20230103 13:05:58.863"/>
+</kw>
+<if>
+<branch type="IF" condition="&quot;${client data list}[4]&quot; == &quot;Sales Dependency&quot;">
+<kw name="Log" library="BuiltIn">
+<arg>Proceed further</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:58.867" level="INFO">Proceed further</msg>
+<status status="PASS" starttime="20230103 13:05:58.866" endtime="20230103 13:05:58.867"/>
+</kw>
+<if>
+<branch type="IF" condition="&quot;${client data list}[8]&quot; == &quot;Yes&quot;">
+<kw name="Log" library="BuiltIn">
+<arg>Proceed Further</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.868" endtime="20230103 13:05:58.868"/>
+</kw>
+<kw name="Converting Current,FollowUp and Calculated Dates">
+<var>${FollowUpDateFiltered}</var>
+<var>${TodayFilteredDate}</var>
+<arg>${client data list}</arg>
+<arg>${configlist}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:58.869" endtime="20230103 13:05:58.869"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${followupdateStr}</var>
+<arg>${FollowUpDateFiltered}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.870" endtime="20230103 13:05:58.871"/>
+</kw>
+<kw name="Is Weekend" library="DateLogic">
+<var>${CalculatedDate}</var>
+<arg>${followupdateStr}</arg>
+<arg>${client data list}[7]</arg>
+<status status="NOT RUN" starttime="20230103 13:05:58.873" endtime="20230103 13:05:58.875"/>
+</kw>
+<kw name="Coverting Calculated Date">
+<var>${CalculatedDateFiltered}</var>
+<arg>${client data list}</arg>
+<arg>${configlist}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:58.876" endtime="20230103 13:05:58.880"/>
+</kw>
+<if>
+<branch type="IF" condition="'${FollowUpDateFiltered}' == '${TodayFilteredDate}'">
+<kw name="Log" library="BuiltIn">
+<arg>Dates are equal</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.883" endtime="20230103 13:05:58.884"/>
+</kw>
+<kw name="checking Communication Type and sending mail">
+<arg>${configlist}</arg>
+<arg>${client data list}</arg>
+<arg>${rowCount}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:58.885" endtime="20230103 13:05:58.887"/>
+</kw>
+<kw name="Updating followup date as Calculated date In excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:58.887" endtime="20230103 13:05:58.891"/>
+</kw>
+<kw name="Total Folowup Counter">
+<arg>${client data list}</arg>
+<arg>${rowcount}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:58.892" endtime="20230103 13:05:58.893"/>
+</kw>
+<if>
+<branch type="IF" condition="'${TodayFilteredDate}' == '${CalculatedDateFiltered}'">
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.896" endtime="20230103 13:05:58.898"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:58.894" endtime="20230103 13:05:58.899"/>
+</branch>
+<branch type="ELSE">
+<kw name="Updating followup date as Calculated date In excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:58.901" endtime="20230103 13:05:58.902"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.904" endtime="20230103 13:05:58.905"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:58.899" endtime="20230103 13:05:58.907"/>
+</branch>
+<status status="NOT RUN" starttime="20230103 13:05:58.894" endtime="20230103 13:05:58.908"/>
+</if>
+<status status="NOT RUN" starttime="20230103 13:05:58.882" endtime="20230103 13:05:58.908"/>
+</branch>
+<branch type="ELSE IF" condition="'${TodayFilteredDate}' &lt; '${FollowUpDateFiltered}'">
+<kw name="Log" library="BuiltIn">
+<arg>${TodayFilteredDate}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.909" endtime="20230103 13:05:58.910"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${FollowUpDateFiltered}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.911" endtime="20230103 13:05:58.912"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>FollowUpdate date is greater than current date</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.912" endtime="20230103 13:05:58.914"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.915" endtime="20230103 13:05:58.915"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:58.908" endtime="20230103 13:05:58.916"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>FollowUpDate date is smaller than current date</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.922" endtime="20230103 13:05:58.925"/>
+</kw>
+<if>
+<branch type="IF" condition="'${CalculatedDateFiltered}' == '${TodayFilteredDate}'">
+<kw name="Updating followup date as Calculated date In excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:58.928" endtime="20230103 13:05:58.929"/>
+</kw>
+<kw name="checking Communication Type and sending mail">
+<arg>${configlist}</arg>
+<arg>${client data list}</arg>
+<arg>${rowCount}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:58.930" endtime="20230103 13:05:58.931"/>
+</kw>
+<kw name="Total Folowup Counter">
+<arg>${client data list}</arg>
+<arg>${rowCount}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:58.932" endtime="20230103 13:05:58.933"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.934" endtime="20230103 13:05:58.934"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:58.927" endtime="20230103 13:05:58.935"/>
+</branch>
+<branch type="ELSE IF" condition="'${CalculatedDateFiltered}' &gt; '${TodayFilteredDate}'">
+<kw name="Updating followup date as Calculated date In excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:58.938" endtime="20230103 13:05:58.941"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.942" endtime="20230103 13:05:58.943"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:58.936" endtime="20230103 13:05:58.943"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Both Followup date and Calculated Followup has been Passed</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.944" endtime="20230103 13:05:58.945"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:58.945" endtime="20230103 13:05:58.946"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:58.943" endtime="20230103 13:05:58.947"/>
+</branch>
+<status status="NOT RUN" starttime="20230103 13:05:58.926" endtime="20230103 13:05:58.947"/>
+</if>
+<status status="NOT RUN" starttime="20230103 13:05:58.919" endtime="20230103 13:05:58.947"/>
+</branch>
+<status status="NOT RUN" starttime="20230103 13:05:58.880" endtime="20230103 13:05:58.947"/>
+</if>
+<status status="NOT RUN" starttime="20230103 13:05:58.868" endtime="20230103 13:05:58.947"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Follow up required is No</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:58.950" level="INFO">Follow up required is No</msg>
+<status status="PASS" starttime="20230103 13:05:58.949" endtime="20230103 13:05:58.952"/>
+</kw>
+<kw name="Emptying Cell from excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<try>
+<branch type="TRY">
+<kw name="Open Workbook" library="RPA.Excel.Files">
+<arg>${configlist}[0]</arg>
+<arg>overwrite=True</arg>
+<doc>Open an existing Excel workbook.</doc>
+<msg timestamp="20230103 13:05:58.968" level="INFO">Closing workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x000001BA2EE29B50&gt;</msg>
+<msg timestamp="20230103 13:05:59.240" level="INFO">Opened workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x000001BA2EE3BA00&gt;</msg>
+<status status="PASS" starttime="20230103 13:05:58.964" endtime="20230103 13:05:59.243"/>
+</kw>
+<status status="PASS" starttime="20230103 13:05:58.961" endtime="20230103 13:05:59.247"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" library="BuiltIn">
+<arg>Writing Excel Option</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:59.249" endtime="20230103 13:05:59.249"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:59.248" endtime="20230103 13:05:59.250"/>
+</branch>
+<branch type="ELSE">
+<kw name="Set Cell Value" library="RPA.Excel.Files">
+<arg>${rowCount}</arg>
+<arg>K</arg>
+<arg>${EMPTY}</arg>
+<doc>Set a cell value in the given worksheet.</doc>
+<status status="PASS" starttime="20230103 13:05:59.252" endtime="20230103 13:05:59.257"/>
+</kw>
+<kw name="Save Workbook" library="RPA.Excel.Files">
+<doc>Save the active workbook.</doc>
+<status status="PASS" starttime="20230103 13:05:59.259" endtime="20230103 13:05:59.449"/>
+</kw>
+<status status="PASS" starttime="20230103 13:05:59.251" endtime="20230103 13:05:59.450"/>
+</branch>
+<status status="PASS" starttime="20230103 13:05:58.961" endtime="20230103 13:05:59.452"/>
+</try>
+<status status="PASS" starttime="20230103 13:05:58.955" endtime="20230103 13:05:59.453"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230103 13:05:59.465" level="INFO">${rowCount} = 6</msg>
+<status status="PASS" starttime="20230103 13:05:59.456" endtime="20230103 13:05:59.467"/>
+</kw>
+<status status="PASS" starttime="20230103 13:05:58.948" endtime="20230103 13:05:59.468"/>
+</branch>
+<status status="PASS" starttime="20230103 13:05:58.867" endtime="20230103 13:05:59.469"/>
+</if>
+<status status="PASS" starttime="20230103 13:05:58.864" endtime="20230103 13:05:59.469"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>No sales Dependancy</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:59.471" endtime="20230103 13:05:59.472"/>
+</kw>
+<kw name="Emptying Cell from excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:59.473" endtime="20230103 13:05:59.474"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:59.475" endtime="20230103 13:05:59.476"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:59.470" endtime="20230103 13:05:59.478"/>
+</branch>
+<status status="PASS" starttime="20230103 13:05:58.863" endtime="20230103 13:05:59.479"/>
+</if>
+<status status="PASS" starttime="20230103 13:05:58.762" endtime="20230103 13:05:59.479"/>
+</iter>
+<iter>
+<var name="${row}">{'S.No': 5, 'Proposal': 'Supreme Judiciary Council Qatar RFP Discussion (Chat Bots)', 'Customer': 'FIFA', 'Sales SPOC': 'ashwini', 'Sales SPOC Email ID': 'ashwini.mogal@yash.com', 'Status': 'Sales Dep...</var>
+<kw name="Log" library="BuiltIn">
+<arg>${row}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:59.486" level="INFO">{'S.No': 5, 'Proposal': 'Supreme Judiciary Council Qatar RFP Discussion (Chat Bots)', 'Customer': 'FIFA', 'Sales SPOC': 'ashwini', 'Sales SPOC Email ID': 'ashwini.mogal@yash.com', 'Status': 'Sales Dependency', 'Communication Type': 'Follow Up', 'Follow Up Required': 'Yes', 'Follow Up Date': datetime.datetime(2023, 1, 3, 0, 0), 'Reminder Frequency': 0, 'Total no. of followup mail send': 8}</msg>
+<status status="PASS" starttime="20230103 13:05:59.483" endtime="20230103 13:05:59.486"/>
+</kw>
+<kw name="Getting Single Client Data">
+<var>${client data list}</var>
+<arg>${row}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${customer}</var>
+<arg>${row}[Customer]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:59.491" level="INFO">${customer} = FIFA</msg>
+<status status="PASS" starttime="20230103 13:05:59.489" endtime="20230103 13:05:59.491"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${proposal}</var>
+<arg>${row}[Proposal]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:59.494" level="INFO">${proposal} = Supreme Judiciary Council Qatar RFP Discussion (Chat Bots)</msg>
+<status status="PASS" starttime="20230103 13:05:59.492" endtime="20230103 13:05:59.495"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${SalesRep}</var>
+<arg>${row}[Sales SPOC]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:59.499" level="INFO">${SalesRep} = ashwini</msg>
+<status status="PASS" starttime="20230103 13:05:59.498" endtime="20230103 13:05:59.500"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${SalesRepEmail}</var>
+<arg>${row}[Sales SPOC Email ID]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:59.506" level="INFO">${SalesRepEmail} = ashwini.mogal@yash.com</msg>
+<status status="PASS" starttime="20230103 13:05:59.501" endtime="20230103 13:05:59.507"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${Status}</var>
+<arg>${row}[Status]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:59.511" level="INFO">${Status} = Sales Dependency</msg>
+<status status="PASS" starttime="20230103 13:05:59.509" endtime="20230103 13:05:59.512"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${CommunicationType}</var>
+<arg>${row}[Communication Type]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:59.514" level="INFO">${CommunicationType} = Follow Up</msg>
+<status status="PASS" starttime="20230103 13:05:59.512" endtime="20230103 13:05:59.515"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${FollowUpDate}</var>
+<arg>${row}[Follow Up Date]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:59.517" level="INFO">${FollowUpDate} = 2023-01-03 00:00:00</msg>
+<status status="PASS" starttime="20230103 13:05:59.515" endtime="20230103 13:05:59.517"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ReminderFrequency}</var>
+<arg>${row}[Reminder Frequency]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:59.521" level="INFO">${ReminderFrequency} = 0</msg>
+<status status="PASS" starttime="20230103 13:05:59.518" endtime="20230103 13:05:59.521"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${followup_Required}</var>
+<arg>${row}[Follow Up Required]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:59.535" level="INFO">${followup_Required} = Yes</msg>
+<status status="PASS" starttime="20230103 13:05:59.527" endtime="20230103 13:05:59.535"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${TotalFollowupMail}</var>
+<arg>${row}[Total no. of followup mail send]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:05:59.538" level="INFO">${TotalFollowupMail} = 8</msg>
+<status status="PASS" starttime="20230103 13:05:59.537" endtime="20230103 13:05:59.539"/>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<var>${client data list}</var>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20230103 13:05:59.542" level="INFO">${client data list} = []</msg>
+<status status="PASS" starttime="20230103 13:05:59.540" endtime="20230103 13:05:59.543"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${client data list}</arg>
+<arg>${customer}</arg>
+<arg>${proposal}</arg>
+<arg>${SalesRep}</arg>
+<arg>${SalesRepEmail}</arg>
+<arg>${Status}</arg>
+<arg>${CommunicationType}</arg>
+<arg>${FollowUpDate}</arg>
+<arg>${ReminderFrequency}</arg>
+<arg>${followup_Required}</arg>
+<arg>${TotalFollowupMail}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230103 13:05:59.544" endtime="20230103 13:05:59.551"/>
+</kw>
+<return>
+<value>${client data list}</value>
+<status status="PASS" starttime="20230103 13:05:59.552" endtime="20230103 13:05:59.553"/>
+</return>
+<msg timestamp="20230103 13:05:59.554" level="INFO">${client data list} = ['FIFA', 'Supreme Judiciary Council Qatar RFP Discussion (Chat Bots)', 'ashwini', 'ashwini.mogal@yash.com', 'Sales Dependency', 'Follow Up', datetime.datetime(2023, 1, 3, 0, 0), 0, 'Yes', 8]</msg>
+<status status="PASS" starttime="20230103 13:05:59.487" endtime="20230103 13:05:59.556"/>
+</kw>
+<if>
+<branch type="IF" condition="&quot;${client data list}[4]&quot; == &quot;Sales Dependency&quot;">
+<kw name="Log" library="BuiltIn">
+<arg>Proceed further</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:59.561" level="INFO">Proceed further</msg>
+<status status="PASS" starttime="20230103 13:05:59.559" endtime="20230103 13:05:59.562"/>
+</kw>
+<if>
+<branch type="IF" condition="&quot;${client data list}[8]&quot; == &quot;Yes&quot;">
+<kw name="Log" library="BuiltIn">
+<arg>Proceed Further</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:59.568" level="INFO">Proceed Further</msg>
+<status status="PASS" starttime="20230103 13:05:59.565" endtime="20230103 13:05:59.569"/>
+</kw>
+<kw name="Converting Current,FollowUp and Calculated Dates">
+<var>${FollowUpDateFiltered}</var>
+<var>${TodayFilteredDate}</var>
+<arg>${client data list}</arg>
+<arg>${configlist}</arg>
+<arg>${CalculatedDate}</arg>
+<kw name="Convert Date" library="DateTime">
+<var>${FollowUpDateFiltered}</var>
+<arg>${client data list}[6]</arg>
+<arg>result_format=%d-%m-%Y</arg>
+<doc>Converts between supported `date formats`.</doc>
+<msg timestamp="20230103 13:05:59.577" level="INFO">${FollowUpDateFiltered} = 03-01-2023</msg>
+<status status="PASS" starttime="20230103 13:05:59.574" endtime="20230103 13:05:59.578"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${FollowUpDateFiltered}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:59.580" level="INFO">03-01-2023</msg>
+<status status="PASS" starttime="20230103 13:05:59.579" endtime="20230103 13:05:59.580"/>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<var>${TodayFilteredDate}</var>
+<arg>${configlist}[3]</arg>
+<arg>result_format=%d-%m-%Y</arg>
+<doc>Converts between supported `date formats`.</doc>
+<msg timestamp="20230103 13:05:59.584" level="INFO">${TodayFilteredDate} = 03-01-2023</msg>
+<status status="PASS" starttime="20230103 13:05:59.582" endtime="20230103 13:05:59.585"/>
+</kw>
+<return>
+<value>${FollowUpDateFiltered}</value>
+<value>${TodayFilteredDate}</value>
+<status status="PASS" starttime="20230103 13:05:59.586" endtime="20230103 13:05:59.588"/>
+</return>
+<msg timestamp="20230103 13:05:59.592" level="INFO">${FollowUpDateFiltered} = 03-01-2023</msg>
+<msg timestamp="20230103 13:05:59.593" level="INFO">${TodayFilteredDate} = 03-01-2023</msg>
+<status status="PASS" starttime="20230103 13:05:59.570" endtime="20230103 13:05:59.594"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${followupdateStr}</var>
+<arg>${FollowUpDateFiltered}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20230103 13:05:59.607" level="INFO">${followupdateStr} = 03-01-2023</msg>
+<status status="PASS" starttime="20230103 13:05:59.602" endtime="20230103 13:05:59.608"/>
+</kw>
+<kw name="Is Weekend" library="DateLogic">
+<var>${CalculatedDate}</var>
+<arg>${followupdateStr}</arg>
+<arg>${client data list}[7]</arg>
+<msg timestamp="20230103 13:05:59.613" level="INFO">1
+Weekday   1
+2023-01-03 00:00:00</msg>
+<msg timestamp="20230103 13:05:59.614" level="INFO">${CalculatedDate} = 2023-01-03 00:00:00</msg>
+<status status="PASS" starttime="20230103 13:05:59.610" endtime="20230103 13:05:59.615"/>
+</kw>
+<kw name="Coverting Calculated Date">
+<var>${CalculatedDateFiltered}</var>
+<arg>${client data list}</arg>
+<arg>${configlist}</arg>
+<arg>${CalculatedDate}</arg>
+<kw name="Convert Date" library="DateTime">
+<var>${CalculatedDateFiltered}</var>
+<arg>${CalculatedDate}</arg>
+<arg>result_format=%d-%m-%Y</arg>
+<doc>Converts between supported `date formats`.</doc>
+<msg timestamp="20230103 13:05:59.625" level="INFO">${CalculatedDateFiltered} = 03-01-2023</msg>
+<status status="PASS" starttime="20230103 13:05:59.622" endtime="20230103 13:05:59.626"/>
+</kw>
+<return>
+<value>${CalculatedDateFiltered}</value>
+<status status="PASS" starttime="20230103 13:05:59.627" endtime="20230103 13:05:59.628"/>
+</return>
+<msg timestamp="20230103 13:05:59.629" level="INFO">${CalculatedDateFiltered} = 03-01-2023</msg>
+<status status="PASS" starttime="20230103 13:05:59.617" endtime="20230103 13:05:59.630"/>
+</kw>
+<if>
+<branch type="IF" condition="'${FollowUpDateFiltered}' == '${TodayFilteredDate}'">
+<kw name="Log" library="BuiltIn">
+<arg>Dates are equal</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:59.637" level="INFO">Dates are equal</msg>
+<status status="PASS" starttime="20230103 13:05:59.636" endtime="20230103 13:05:59.639"/>
+</kw>
+<kw name="checking Communication Type and sending mail">
+<arg>${configlist}</arg>
+<arg>${client data list}</arg>
+<arg>${rowCount}</arg>
+<if>
+<branch type="IF" condition="&quot;${client data list}[5]&quot; == &quot;Enquiry&quot;">
+<kw name="Enquiry Process">
+<arg>${client data list}</arg>
+<arg>${configlist}</arg>
+<status status="NOT RUN" starttime="20230103 13:05:59.646" endtime="20230103 13:05:59.648"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>enquiry email should be sent</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:59.650" endtime="20230103 13:05:59.652"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:59.644" endtime="20230103 13:05:59.652"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${client data list}[5]&quot; == &quot;Follow Up&quot;">
+<kw name="Follow up Process">
+<arg>${client data list}</arg>
+<arg>${configlist}</arg>
+<kw name="Replace String" library="String">
+<var>${FollowUpEmailBody}</var>
+<arg>${configlist}[2]</arg>
+<arg>&lt;SalesExecName&gt;</arg>
+<arg>${client data list}[2]</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20230103 13:05:59.662" level="INFO">${FollowUpEmailBody} = Dear  ashwini ,
+
+This is a follow up email for "&lt;proposal&gt;"   proposal
+
+
+
+Regards 
+Opportunity Bot</msg>
+<status status="PASS" starttime="20230103 13:05:59.659" endtime="20230103 13:05:59.663"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${FollowUpEmailBody}</var>
+<arg>${FollowUpEmailBody}</arg>
+<arg>&lt;proposal&gt;</arg>
+<arg>${client data list}[1]</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20230103 13:05:59.669" level="INFO">${FollowUpEmailBody} = Dear  ashwini ,
+
+This is a follow up email for "Supreme Judiciary Council Qatar RFP Discussion (Chat Bots)"   proposal
+
+
+
+Regards 
+Opportunity Bot</msg>
+<status status="PASS" starttime="20230103 13:05:59.664" endtime="20230103 13:05:59.670"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${configlist}[2]</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:59.671" level="INFO">Dear  &lt;SalesExecName&gt; ,
+
+This is a follow up email for "&lt;proposal&gt;"   proposal
+
+
+
+Regards 
+Opportunity Bot</msg>
+<status status="PASS" starttime="20230103 13:05:59.670" endtime="20230103 13:05:59.671"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${client data list}[3]</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:59.676" level="INFO">ashwini.mogal@yash.com</msg>
+<status status="PASS" starttime="20230103 13:05:59.672" endtime="20230103 13:05:59.677"/>
+</kw>
+<kw name="Send Email" library="RPA.Outlook.Application">
+<arg>recipients=${client data list}[3]</arg>
+<arg>subject=${client data list}[1]</arg>
+<arg>body=${FollowUpEmailBody}</arg>
+<doc>Send email with Outlook</doc>
+<status status="PASS" starttime="20230103 13:05:59.678" endtime="20230103 13:05:59.760"/>
+</kw>
+<status status="PASS" starttime="20230103 13:05:59.655" endtime="20230103 13:05:59.763"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>follow up email should be sent</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:05:59.765" level="INFO">follow up email should be sent</msg>
+<status status="PASS" starttime="20230103 13:05:59.764" endtime="20230103 13:05:59.766"/>
+</kw>
+<status status="PASS" starttime="20230103 13:05:59.654" endtime="20230103 13:05:59.766"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>No communication needed</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:59.768" endtime="20230103 13:05:59.769"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:59.767" endtime="20230103 13:05:59.771"/>
+</branch>
+<status status="PASS" starttime="20230103 13:05:59.644" endtime="20230103 13:05:59.775"/>
+</if>
+<status status="PASS" starttime="20230103 13:05:59.640" endtime="20230103 13:05:59.776"/>
+</kw>
+<kw name="Updating followup date as Calculated date In excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<try>
+<branch type="TRY">
+<kw name="Open Workbook" library="RPA.Excel.Files">
+<arg>${configlist}[0]</arg>
+<arg>overwrite=True</arg>
+<doc>Open an existing Excel workbook.</doc>
+<msg timestamp="20230103 13:05:59.785" level="INFO">Closing workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x000001BA2EE3BA00&gt;</msg>
+<msg timestamp="20230103 13:05:59.907" level="INFO">Opened workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x000001BA2EE3BA00&gt;</msg>
+<status status="PASS" starttime="20230103 13:05:59.781" endtime="20230103 13:05:59.908"/>
+</kw>
+<status status="PASS" starttime="20230103 13:05:59.780" endtime="20230103 13:05:59.909"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" library="BuiltIn">
+<arg>Writing Excel Option</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:05:59.911" endtime="20230103 13:05:59.912"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:05:59.910" endtime="20230103 13:05:59.913"/>
+</branch>
+<branch type="ELSE">
+<kw name="Set Cell Value" library="RPA.Excel.Files">
+<arg>${rowCount}</arg>
+<arg>I</arg>
+<arg>${CalculatedDate}</arg>
+<doc>Set a cell value in the given worksheet.</doc>
+<status status="PASS" starttime="20230103 13:05:59.917" endtime="20230103 13:05:59.921"/>
+</kw>
+<kw name="Save Workbook" library="RPA.Excel.Files">
+<doc>Save the active workbook.</doc>
+<status status="PASS" starttime="20230103 13:05:59.922" endtime="20230103 13:06:00.181"/>
+</kw>
+<status status="PASS" starttime="20230103 13:05:59.914" endtime="20230103 13:06:00.183"/>
+</branch>
+<status status="PASS" starttime="20230103 13:05:59.780" endtime="20230103 13:06:00.184"/>
+</try>
+<status status="PASS" starttime="20230103 13:05:59.778" endtime="20230103 13:06:00.185"/>
+</kw>
+<kw name="Total Folowup Counter">
+<arg>${client data list}</arg>
+<arg>${rowcount}</arg>
+<if>
+<branch type="IF" condition="&quot;${client data list}[9]&quot; == &quot;None&quot;">
+<kw name="Open Workbook" library="RPA.Excel.Files">
+<arg>Opportunity tracker_Remainder.xlsx</arg>
+<doc>Open an existing Excel workbook.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.194" endtime="20230103 13:06:00.195"/>
+</kw>
+<kw name="Set Cell Value" library="RPA.Excel.Files">
+<arg>${rowcount}</arg>
+<arg>K</arg>
+<arg>1</arg>
+<doc>Set a cell value in the given worksheet.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.200" endtime="20230103 13:06:00.202"/>
+</kw>
+<kw name="Save Workbook" library="RPA.Excel.Files">
+<doc>Save the active workbook.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.204" endtime="20230103 13:06:00.209"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowcount}</var>
+<arg>${rowcount} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.212" endtime="20230103 13:06:00.213"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:06:00.191" endtime="20230103 13:06:00.214"/>
+</branch>
+<branch type="ELSE">
+<kw name="Evaluate" library="BuiltIn">
+<var>${TotalFollowupMail}</var>
+<arg>${client data list}[9] + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230103 13:06:00.218" level="INFO">${TotalFollowupMail} = 9</msg>
+<status status="PASS" starttime="20230103 13:06:00.216" endtime="20230103 13:06:00.218"/>
+</kw>
+<kw name="Set Cell Value" library="RPA.Excel.Files">
+<arg>${rowcount}</arg>
+<arg>K</arg>
+<arg>${TotalFollowupMail}</arg>
+<doc>Set a cell value in the given worksheet.</doc>
+<status status="PASS" starttime="20230103 13:06:00.219" endtime="20230103 13:06:00.223"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${TotalFollowupMail}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:06:00.228" level="INFO">9</msg>
+<status status="PASS" starttime="20230103 13:06:00.226" endtime="20230103 13:06:00.229"/>
+</kw>
+<kw name="Save Workbook" library="RPA.Excel.Files">
+<doc>Save the active workbook.</doc>
+<status status="PASS" starttime="20230103 13:06:00.229" endtime="20230103 13:06:00.381"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowcount}</var>
+<arg>${rowcount} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230103 13:06:00.388" level="INFO">${rowcount} = 7</msg>
+<status status="PASS" starttime="20230103 13:06:00.384" endtime="20230103 13:06:00.389"/>
+</kw>
+<status status="PASS" starttime="20230103 13:06:00.214" endtime="20230103 13:06:00.390"/>
+</branch>
+<status status="PASS" starttime="20230103 13:06:00.190" endtime="20230103 13:06:00.390"/>
+</if>
+<status status="PASS" starttime="20230103 13:06:00.186" endtime="20230103 13:06:00.390"/>
+</kw>
+<if>
+<branch type="IF" condition="'${TodayFilteredDate}' == '${CalculatedDateFiltered}'">
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230103 13:06:00.398" level="INFO">${rowCount} = 7</msg>
+<status status="PASS" starttime="20230103 13:06:00.394" endtime="20230103 13:06:00.399"/>
+</kw>
+<status status="PASS" starttime="20230103 13:06:00.391" endtime="20230103 13:06:00.400"/>
+</branch>
+<branch type="ELSE">
+<kw name="Updating followup date as Calculated date In excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:06:00.402" endtime="20230103 13:06:00.403"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.406" endtime="20230103 13:06:00.407"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:06:00.400" endtime="20230103 13:06:00.407"/>
+</branch>
+<status status="PASS" starttime="20230103 13:06:00.391" endtime="20230103 13:06:00.407"/>
+</if>
+<status status="PASS" starttime="20230103 13:05:59.634" endtime="20230103 13:06:00.408"/>
+</branch>
+<branch type="ELSE IF" condition="'${TodayFilteredDate}' &lt; '${FollowUpDateFiltered}'">
+<kw name="Log" library="BuiltIn">
+<arg>${TodayFilteredDate}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.410" endtime="20230103 13:06:00.415"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${FollowUpDateFiltered}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.416" endtime="20230103 13:06:00.418"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>FollowUpdate date is greater than current date</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.419" endtime="20230103 13:06:00.420"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.422" endtime="20230103 13:06:00.423"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:06:00.408" endtime="20230103 13:06:00.425"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>FollowUpDate date is smaller than current date</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.431" endtime="20230103 13:06:00.431"/>
+</kw>
+<if>
+<branch type="IF" condition="'${CalculatedDateFiltered}' == '${TodayFilteredDate}'">
+<kw name="Updating followup date as Calculated date In excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:06:00.435" endtime="20230103 13:06:00.436"/>
+</kw>
+<kw name="checking Communication Type and sending mail">
+<arg>${configlist}</arg>
+<arg>${client data list}</arg>
+<arg>${rowCount}</arg>
+<status status="NOT RUN" starttime="20230103 13:06:00.438" endtime="20230103 13:06:00.440"/>
+</kw>
+<kw name="Total Folowup Counter">
+<arg>${client data list}</arg>
+<arg>${rowCount}</arg>
+<status status="NOT RUN" starttime="20230103 13:06:00.442" endtime="20230103 13:06:00.445"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.449" endtime="20230103 13:06:00.450"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:06:00.434" endtime="20230103 13:06:00.450"/>
+</branch>
+<branch type="ELSE IF" condition="'${CalculatedDateFiltered}' &gt; '${TodayFilteredDate}'">
+<kw name="Updating followup date as Calculated date In excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:06:00.454" endtime="20230103 13:06:00.457"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.458" endtime="20230103 13:06:00.459"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:06:00.453" endtime="20230103 13:06:00.462"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Both Followup date and Calculated Followup has been Passed</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.466" endtime="20230103 13:06:00.467"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.470" endtime="20230103 13:06:00.472"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:06:00.464" endtime="20230103 13:06:00.481"/>
+</branch>
+<status status="NOT RUN" starttime="20230103 13:06:00.433" endtime="20230103 13:06:00.483"/>
+</if>
+<status status="NOT RUN" starttime="20230103 13:06:00.429" endtime="20230103 13:06:00.483"/>
+</branch>
+<status status="PASS" starttime="20230103 13:05:59.633" endtime="20230103 13:06:00.484"/>
+</if>
+<status status="PASS" starttime="20230103 13:05:59.563" endtime="20230103 13:06:00.487"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Follow up required is No</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.493" endtime="20230103 13:06:00.494"/>
+</kw>
+<kw name="Emptying Cell from excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:06:00.495" endtime="20230103 13:06:00.496"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.499" endtime="20230103 13:06:00.503"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:06:00.491" endtime="20230103 13:06:00.504"/>
+</branch>
+<status status="PASS" starttime="20230103 13:05:59.562" endtime="20230103 13:06:00.507"/>
+</if>
+<status status="PASS" starttime="20230103 13:05:59.557" endtime="20230103 13:06:00.507"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>No sales Dependancy</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.509" endtime="20230103 13:06:00.510"/>
+</kw>
+<kw name="Emptying Cell from excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:06:00.511" endtime="20230103 13:06:00.514"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.514" endtime="20230103 13:06:00.515"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:06:00.508" endtime="20230103 13:06:00.516"/>
+</branch>
+<status status="PASS" starttime="20230103 13:05:59.556" endtime="20230103 13:06:00.518"/>
+</if>
+<status status="PASS" starttime="20230103 13:05:59.482" endtime="20230103 13:06:00.518"/>
+</iter>
+<iter>
+<var name="${row}">{'S.No': 6, 'Proposal': 'Test ', 'Customer': 'HUB', 'Sales SPOC': 'Sanjesh', 'Sales SPOC Email ID': 'sanjesh.ld@yash.com', 'Status': 'Sales Dependency', 'Communication Type': 'Enquiry', 'Follow Up Req...</var>
+<kw name="Log" library="BuiltIn">
+<arg>${row}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:06:00.526" level="INFO">{'S.No': 6, 'Proposal': 'Test ', 'Customer': 'HUB', 'Sales SPOC': 'Sanjesh', 'Sales SPOC Email ID': 'sanjesh.ld@yash.com', 'Status': 'Sales Dependency', 'Communication Type': 'Enquiry', 'Follow Up Required': 'Yes', 'Follow Up Date': datetime.datetime(2023, 1, 4, 0, 0), 'Reminder Frequency': 3, 'Total no. of followup mail send': 2}</msg>
+<status status="PASS" starttime="20230103 13:06:00.524" endtime="20230103 13:06:00.528"/>
+</kw>
+<kw name="Getting Single Client Data">
+<var>${client data list}</var>
+<arg>${row}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${customer}</var>
+<arg>${row}[Customer]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:06:00.533" level="INFO">${customer} = HUB</msg>
+<status status="PASS" starttime="20230103 13:06:00.531" endtime="20230103 13:06:00.534"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${proposal}</var>
+<arg>${row}[Proposal]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:06:00.539" level="INFO">${proposal} = Test </msg>
+<status status="PASS" starttime="20230103 13:06:00.536" endtime="20230103 13:06:00.539"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${SalesRep}</var>
+<arg>${row}[Sales SPOC]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:06:00.545" level="INFO">${SalesRep} = Sanjesh</msg>
+<status status="PASS" starttime="20230103 13:06:00.541" endtime="20230103 13:06:00.545"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${SalesRepEmail}</var>
+<arg>${row}[Sales SPOC Email ID]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:06:00.549" level="INFO">${SalesRepEmail} = sanjesh.ld@yash.com</msg>
+<status status="PASS" starttime="20230103 13:06:00.547" endtime="20230103 13:06:00.549"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${Status}</var>
+<arg>${row}[Status]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:06:00.551" level="INFO">${Status} = Sales Dependency</msg>
+<status status="PASS" starttime="20230103 13:06:00.550" endtime="20230103 13:06:00.552"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${CommunicationType}</var>
+<arg>${row}[Communication Type]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:06:00.560" level="INFO">${CommunicationType} = Enquiry</msg>
+<status status="PASS" starttime="20230103 13:06:00.553" endtime="20230103 13:06:00.562"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${FollowUpDate}</var>
+<arg>${row}[Follow Up Date]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:06:00.569" level="INFO">${FollowUpDate} = 2023-01-04 00:00:00</msg>
+<status status="PASS" starttime="20230103 13:06:00.566" endtime="20230103 13:06:00.570"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ReminderFrequency}</var>
+<arg>${row}[Reminder Frequency]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:06:00.576" level="INFO">${ReminderFrequency} = 3</msg>
+<status status="PASS" starttime="20230103 13:06:00.572" endtime="20230103 13:06:00.578"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${followup_Required}</var>
+<arg>${row}[Follow Up Required]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:06:00.587" level="INFO">${followup_Required} = Yes</msg>
+<status status="PASS" starttime="20230103 13:06:00.579" endtime="20230103 13:06:00.588"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${TotalFollowupMail}</var>
+<arg>${row}[Total no. of followup mail send]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230103 13:06:00.592" level="INFO">${TotalFollowupMail} = 2</msg>
+<status status="PASS" starttime="20230103 13:06:00.590" endtime="20230103 13:06:00.593"/>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<var>${client data list}</var>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20230103 13:06:00.596" level="INFO">${client data list} = []</msg>
+<status status="PASS" starttime="20230103 13:06:00.594" endtime="20230103 13:06:00.597"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${client data list}</arg>
+<arg>${customer}</arg>
+<arg>${proposal}</arg>
+<arg>${SalesRep}</arg>
+<arg>${SalesRepEmail}</arg>
+<arg>${Status}</arg>
+<arg>${CommunicationType}</arg>
+<arg>${FollowUpDate}</arg>
+<arg>${ReminderFrequency}</arg>
+<arg>${followup_Required}</arg>
+<arg>${TotalFollowupMail}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230103 13:06:00.600" endtime="20230103 13:06:00.607"/>
+</kw>
+<return>
+<value>${client data list}</value>
+<status status="PASS" starttime="20230103 13:06:00.608" endtime="20230103 13:06:00.610"/>
+</return>
+<msg timestamp="20230103 13:06:00.613" level="INFO">${client data list} = ['HUB', 'Test ', 'Sanjesh', 'sanjesh.ld@yash.com', 'Sales Dependency', 'Enquiry', datetime.datetime(2023, 1, 4, 0, 0), 3, 'Yes', 2]</msg>
+<status status="PASS" starttime="20230103 13:06:00.529" endtime="20230103 13:06:00.615"/>
+</kw>
+<if>
+<branch type="IF" condition="&quot;${client data list}[4]&quot; == &quot;Sales Dependency&quot;">
+<kw name="Log" library="BuiltIn">
+<arg>Proceed further</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:06:00.621" level="INFO">Proceed further</msg>
+<status status="PASS" starttime="20230103 13:06:00.618" endtime="20230103 13:06:00.622"/>
+</kw>
+<if>
+<branch type="IF" condition="&quot;${client data list}[8]&quot; == &quot;Yes&quot;">
+<kw name="Log" library="BuiltIn">
+<arg>Proceed Further</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:06:00.634" level="INFO">Proceed Further</msg>
+<status status="PASS" starttime="20230103 13:06:00.631" endtime="20230103 13:06:00.634"/>
+</kw>
+<kw name="Converting Current,FollowUp and Calculated Dates">
+<var>${FollowUpDateFiltered}</var>
+<var>${TodayFilteredDate}</var>
+<arg>${client data list}</arg>
+<arg>${configlist}</arg>
+<arg>${CalculatedDate}</arg>
+<kw name="Convert Date" library="DateTime">
+<var>${FollowUpDateFiltered}</var>
+<arg>${client data list}[6]</arg>
+<arg>result_format=%d-%m-%Y</arg>
+<doc>Converts between supported `date formats`.</doc>
+<msg timestamp="20230103 13:06:00.646" level="INFO">${FollowUpDateFiltered} = 04-01-2023</msg>
+<status status="PASS" starttime="20230103 13:06:00.639" endtime="20230103 13:06:00.648"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${FollowUpDateFiltered}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:06:00.651" level="INFO">04-01-2023</msg>
+<status status="PASS" starttime="20230103 13:06:00.649" endtime="20230103 13:06:00.652"/>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<var>${TodayFilteredDate}</var>
+<arg>${configlist}[3]</arg>
+<arg>result_format=%d-%m-%Y</arg>
+<doc>Converts between supported `date formats`.</doc>
+<msg timestamp="20230103 13:06:00.657" level="INFO">${TodayFilteredDate} = 03-01-2023</msg>
+<status status="PASS" starttime="20230103 13:06:00.654" endtime="20230103 13:06:00.661"/>
+</kw>
+<return>
+<value>${FollowUpDateFiltered}</value>
+<value>${TodayFilteredDate}</value>
+<status status="PASS" starttime="20230103 13:06:00.663" endtime="20230103 13:06:00.663"/>
+</return>
+<msg timestamp="20230103 13:06:00.666" level="INFO">${FollowUpDateFiltered} = 04-01-2023</msg>
+<msg timestamp="20230103 13:06:00.666" level="INFO">${TodayFilteredDate} = 03-01-2023</msg>
+<status status="PASS" starttime="20230103 13:06:00.635" endtime="20230103 13:06:00.667"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${followupdateStr}</var>
+<arg>${FollowUpDateFiltered}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20230103 13:06:00.669" level="INFO">${followupdateStr} = 04-01-2023</msg>
+<status status="PASS" starttime="20230103 13:06:00.667" endtime="20230103 13:06:00.670"/>
+</kw>
+<kw name="Is Weekend" library="DateLogic">
+<var>${CalculatedDate}</var>
+<arg>${followupdateStr}</arg>
+<arg>${client data list}[7]</arg>
+<msg timestamp="20230103 13:06:00.677" level="INFO">5
+Saturday =   5
+2023-01-09 00:00:00</msg>
+<msg timestamp="20230103 13:06:00.679" level="INFO">${CalculatedDate} = 2023-01-09 00:00:00</msg>
+<status status="PASS" starttime="20230103 13:06:00.673" endtime="20230103 13:06:00.679"/>
+</kw>
+<kw name="Coverting Calculated Date">
+<var>${CalculatedDateFiltered}</var>
+<arg>${client data list}</arg>
+<arg>${configlist}</arg>
+<arg>${CalculatedDate}</arg>
+<kw name="Convert Date" library="DateTime">
+<var>${CalculatedDateFiltered}</var>
+<arg>${CalculatedDate}</arg>
+<arg>result_format=%d-%m-%Y</arg>
+<doc>Converts between supported `date formats`.</doc>
+<msg timestamp="20230103 13:06:00.689" level="INFO">${CalculatedDateFiltered} = 09-01-2023</msg>
+<status status="PASS" starttime="20230103 13:06:00.685" endtime="20230103 13:06:00.691"/>
+</kw>
+<return>
+<value>${CalculatedDateFiltered}</value>
+<status status="PASS" starttime="20230103 13:06:00.694" endtime="20230103 13:06:00.696"/>
+</return>
+<msg timestamp="20230103 13:06:00.702" level="INFO">${CalculatedDateFiltered} = 09-01-2023</msg>
+<status status="PASS" starttime="20230103 13:06:00.681" endtime="20230103 13:06:00.703"/>
+</kw>
+<if>
+<branch type="IF" condition="'${FollowUpDateFiltered}' == '${TodayFilteredDate}'">
+<kw name="Log" library="BuiltIn">
+<arg>Dates are equal</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.709" endtime="20230103 13:06:00.711"/>
+</kw>
+<kw name="checking Communication Type and sending mail">
+<arg>${configlist}</arg>
+<arg>${client data list}</arg>
+<arg>${rowCount}</arg>
+<status status="NOT RUN" starttime="20230103 13:06:00.713" endtime="20230103 13:06:00.715"/>
+</kw>
+<kw name="Updating followup date as Calculated date In excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:06:00.718" endtime="20230103 13:06:00.723"/>
+</kw>
+<kw name="Total Folowup Counter">
+<arg>${client data list}</arg>
+<arg>${rowcount}</arg>
+<status status="NOT RUN" starttime="20230103 13:06:00.726" endtime="20230103 13:06:00.728"/>
+</kw>
+<if>
+<branch type="IF" condition="'${TodayFilteredDate}' == '${CalculatedDateFiltered}'">
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.732" endtime="20230103 13:06:00.732"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:06:00.729" endtime="20230103 13:06:00.734"/>
+</branch>
+<branch type="ELSE">
+<kw name="Updating followup date as Calculated date In excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:06:00.738" endtime="20230103 13:06:00.739"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.741" endtime="20230103 13:06:00.742"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:06:00.736" endtime="20230103 13:06:00.744"/>
+</branch>
+<status status="NOT RUN" starttime="20230103 13:06:00.728" endtime="20230103 13:06:00.746"/>
+</if>
+<status status="NOT RUN" starttime="20230103 13:06:00.708" endtime="20230103 13:06:00.747"/>
+</branch>
+<branch type="ELSE IF" condition="'${TodayFilteredDate}' &lt; '${FollowUpDateFiltered}'">
+<kw name="Log" library="BuiltIn">
+<arg>${TodayFilteredDate}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:06:00.755" level="INFO">03-01-2023</msg>
+<status status="PASS" starttime="20230103 13:06:00.751" endtime="20230103 13:06:00.758"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${FollowUpDateFiltered}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:06:00.761" level="INFO">04-01-2023</msg>
+<status status="PASS" starttime="20230103 13:06:00.759" endtime="20230103 13:06:00.763"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>FollowUpdate date is greater than current date</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230103 13:06:00.768" level="INFO">FollowUpdate date is greater than current date</msg>
+<status status="PASS" starttime="20230103 13:06:00.764" endtime="20230103 13:06:00.768"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230103 13:06:00.772" level="INFO">${rowCount} = 8</msg>
+<status status="PASS" starttime="20230103 13:06:00.769" endtime="20230103 13:06:00.773"/>
+</kw>
+<status status="PASS" starttime="20230103 13:06:00.748" endtime="20230103 13:06:00.773"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>FollowUpDate date is smaller than current date</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.775" endtime="20230103 13:06:00.776"/>
+</kw>
+<if>
+<branch type="IF" condition="'${CalculatedDateFiltered}' == '${TodayFilteredDate}'">
+<kw name="Updating followup date as Calculated date In excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:06:00.781" endtime="20230103 13:06:00.782"/>
+</kw>
+<kw name="checking Communication Type and sending mail">
+<arg>${configlist}</arg>
+<arg>${client data list}</arg>
+<arg>${rowCount}</arg>
+<status status="NOT RUN" starttime="20230103 13:06:00.784" endtime="20230103 13:06:00.786"/>
+</kw>
+<kw name="Total Folowup Counter">
+<arg>${client data list}</arg>
+<arg>${rowCount}</arg>
+<status status="NOT RUN" starttime="20230103 13:06:00.787" endtime="20230103 13:06:00.788"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.790" endtime="20230103 13:06:00.791"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:06:00.779" endtime="20230103 13:06:00.791"/>
+</branch>
+<branch type="ELSE IF" condition="'${CalculatedDateFiltered}' &gt; '${TodayFilteredDate}'">
+<kw name="Updating followup date as Calculated date In excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:06:00.793" endtime="20230103 13:06:00.794"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.797" endtime="20230103 13:06:00.799"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:06:00.792" endtime="20230103 13:06:00.800"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Both Followup date and Calculated Followup has been Passed</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.802" endtime="20230103 13:06:00.804"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.807" endtime="20230103 13:06:00.808"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:06:00.801" endtime="20230103 13:06:00.808"/>
+</branch>
+<status status="NOT RUN" starttime="20230103 13:06:00.779" endtime="20230103 13:06:00.809"/>
+</if>
+<status status="NOT RUN" starttime="20230103 13:06:00.774" endtime="20230103 13:06:00.809"/>
+</branch>
+<status status="PASS" starttime="20230103 13:06:00.706" endtime="20230103 13:06:00.809"/>
+</if>
+<status status="PASS" starttime="20230103 13:06:00.630" endtime="20230103 13:06:00.809"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Follow up required is No</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.812" endtime="20230103 13:06:00.813"/>
+</kw>
+<kw name="Emptying Cell from excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:06:00.814" endtime="20230103 13:06:00.816"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.817" endtime="20230103 13:06:00.818"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:06:00.810" endtime="20230103 13:06:00.819"/>
+</branch>
+<status status="PASS" starttime="20230103 13:06:00.623" endtime="20230103 13:06:00.820"/>
+</if>
+<status status="PASS" starttime="20230103 13:06:00.617" endtime="20230103 13:06:00.821"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>No sales Dependancy</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.822" endtime="20230103 13:06:00.823"/>
+</kw>
+<kw name="Emptying Cell from excel">
+<arg>${configlist}</arg>
+<arg>${rowCount}</arg>
+<arg>${CalculatedDate}</arg>
+<status status="NOT RUN" starttime="20230103 13:06:00.824" endtime="20230103 13:06:00.825"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowCount}</var>
+<arg>${rowCount}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.825" endtime="20230103 13:06:00.826"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:06:00.821" endtime="20230103 13:06:00.826"/>
+</branch>
+<status status="PASS" starttime="20230103 13:06:00.616" endtime="20230103 13:06:00.828"/>
+</if>
+<status status="PASS" starttime="20230103 13:06:00.520" endtime="20230103 13:06:00.828"/>
+</iter>
+<status status="PASS" starttime="20230103 13:05:55.729" endtime="20230103 13:06:00.828"/>
+</for>
+<status status="PASS" starttime="20230103 13:05:55.727" endtime="20230103 13:06:00.829"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" library="BuiltIn">
+<arg>Unable to process the bot</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.833" endtime="20230103 13:06:00.834"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:06:00.831" endtime="20230103 13:06:00.835"/>
+</branch>
+<status status="PASS" starttime="20230103 13:05:55.727" endtime="20230103 13:06:00.835"/>
+</try>
+<status status="PASS" starttime="20230103 13:05:55.722" endtime="20230103 13:06:00.836"/>
+</kw>
+<status status="PASS" starttime="20230103 13:05:55.505" endtime="20230103 13:06:00.837"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" library="BuiltIn">
+<arg>Unable to read Excel</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230103 13:06:00.839" endtime="20230103 13:06:00.840"/>
+</kw>
+<status status="NOT RUN" starttime="20230103 13:06:00.838" endtime="20230103 13:06:00.841"/>
+</branch>
+<status status="PASS" starttime="20230103 13:05:55.504" endtime="20230103 13:06:00.841"/>
+</try>
+<status status="PASS" starttime="20230103 13:05:53.189" endtime="20230103 13:06:00.844"/>
+</test>
+<kw name="Quit Application" library="RPA.Outlook.Application" type="TEARDOWN">
+<doc>Quit the application.</doc>
+<status status="PASS" starttime="20230103 13:06:00.865" endtime="20230103 13:06:02.058"/>
+</kw>
+<doc>Opportunity Tracker</doc>
+<status status="PASS" starttime="20230103 13:05:36.495" endtime="20230103 13:06:02.059"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tasks</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Localdrive">Localdrive</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
